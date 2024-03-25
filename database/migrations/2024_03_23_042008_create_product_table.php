@@ -11,8 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('product_name');
+            $table->string('product_description')->nullable();
+            $table->float('product_price');
+            $table->integer('product_stock');
+            $table->float('product_rating');
+            $table->string('product_feedback')->nullable();
+            $table->string('product_image');
+            $table->string('product_review')->nullable();
+            $table->string('product_banner');
+            $table->boolean('is_done')->default(false);
+            
+            // Adding the foreign key column
+            $table->foreignId('category_id')->constrained()
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
@@ -22,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 };

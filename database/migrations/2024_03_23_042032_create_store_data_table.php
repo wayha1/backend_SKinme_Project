@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('store_data', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->string('data_image');
+            $table->string('data_video');
+            $table->string('data_url');
             $table->timestamps();
         });
     }
