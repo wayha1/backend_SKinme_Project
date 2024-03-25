@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,20 +14,20 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request) : JsonResponse
+    public function store(LoginRequest $request): JsonResponse
     {
-        $request->authenticate();
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
 
-        $user = $request ->user();
+        $user = $request->user();
 
-        $user-> tokens()->delete();
+        $token = $user->createToken('api-token')->plainTextToken;
 
-        $token = $user->createToken("api-token");
-
-        return response()-> json([
+        return response()->json([
             'user' => $user,
-            'token'=> $token ->plainTextToken
-        ]); 
+            'token' => $token
+        ]);
     }
 
     /**
@@ -35,6 +35,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): Response
     {
+        $request->user()->tokens()->delete();
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

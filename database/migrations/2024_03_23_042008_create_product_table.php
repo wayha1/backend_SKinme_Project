@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('product_stock');
             $table->float('product_rating');
             $table->string('product_feedback')->nullable();
-            $table->string('product_image');
+            $table->string('product_image')->nullable();
             $table->string('product_review')->nullable();
-            $table->string('product_banner');
+            $table->string('product_banner')->nullable();
             $table->boolean('is_done')->default(false);
             
             // Adding the foreign key column
