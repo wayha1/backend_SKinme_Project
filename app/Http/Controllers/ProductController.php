@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
@@ -12,10 +12,10 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Product::class, 'product');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Product::class, 'product');
+    // }
 
     public function index(Request $request)
     {
