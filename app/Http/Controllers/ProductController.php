@@ -41,7 +41,7 @@ class ProductController extends Controller
 
         $product = Product::create($validatedData);
 
-        return response()->json(['message' => 'Product created successfully', 'product' => new ProductResource($product)], Response::HTTP_CREATED);
+        return response()->json(['message' => 'Product created successfully', 'product' => new ProductResource($product)]);
     }
 
     public function show(Request $request, Product $product)
