@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -20,34 +22,27 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::paginate(10);
-
         return ProductResource::collection($products);
     }
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            "product_name" => "required|max:100",
-            "product_description" => "nullable|string|max:255",
-            "product_price" => "required",
-            "product_stock" => "required",
-            "product_rating" => "required",
-            "product_feedback" => "nullable|max:255",
-            "product_image" => "nullable|max:255",
-            "product_review" => "nullable|max:255",
-            "product_banner" => "nullable|max:255",
-            
-        ]);
-
-        $product = Product::create($validatedData);
-
-        return response()->json(['message' => 'Product created successfully', 'product' => new ProductResource($product)]);
-    }
-
-    public function show(Request $request, Product $product)
+    public function show( Product $product)
     {
         return new ProductResource($product);
     }
+
+    public function store(StoreProductRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        $validatedData['user_id'] = Auth::id();
+
+        $product = Product::create($validatedData);
+
+        return response()->json(['message' => 'Product created successfully', 'product' 
+        => new ProductResource($product)]);
+    }
+
+    
 
     public function update(Request $request, $id)
     {
