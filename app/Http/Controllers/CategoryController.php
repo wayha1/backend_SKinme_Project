@@ -21,22 +21,6 @@ class CategoryController extends Controller
         $categories = Category::paginate(10);
         return new CategoryCollection($categories);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCategoryRequest $request)
-    {
-       $validated = $request->validated([
-        "category_name"=> "required|max:100",
-        "cateogry_icon"=> '$request|string|max:255'
-       ]);
-
-       $category = Category::create($validated);
-
-        return response()->json(['message' => 'Category created successfully', 'product' => new CategoryResource($category)]);
-    }
-
     /**
      * Display the specified resource.
      */
@@ -44,6 +28,25 @@ class CategoryController extends Controller
     {
         return new CategoryResource($category);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreCategoryRequest $request)
+    {
+        $validated = $request->validated();
+
+        // If you want to associate the category with the authenticated user
+        $validated['user_id'] = Auth::id();
+
+        $category = Category::create($validated);
+
+        return response()->json(['message' => 'Category created successfully', 'category' 
+        => new CategoryResource($category)]);
+    }
+    
+
+    
 
     /**
      * Update the specified resource in storage.
