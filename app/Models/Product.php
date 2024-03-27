@@ -28,7 +28,7 @@ class Product extends Model
         'is_done' => 'boolean',
     ];
 
-    public function category(): BelongsTo
+    public function categories(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

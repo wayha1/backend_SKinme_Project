@@ -32,7 +32,8 @@ class StoreProductRequest extends FormRequest
             "product_review" => "nullable|max:255",
             "product_banner" => "nullable|max:255",
 
-            "category_id" => "category_id",
+            // Validation for the category_id field to ensure it exists in the categories table
+            "category_id" => "required|exists:categories,id",
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
@@ -44,24 +45,14 @@ class ProductController extends Controller
 
     
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $validatedData = $request->validate([
-            "product_name" => "required|max:100",
-            "product_description" => "nullable|string|max:255",
-            "product_price" => "required",
-            "product_stock" => "required",
-            "product_rating" => "required",
-            "product_feedback" => "nullable|max:255",
-            "product_image" => "nullable|max:255",
-            "product_review" => "nullable|max:255",
-            "product_banner" => "nullable|max:255",
-        ]);
+        $validatedData = $request->validated();
 
-        $product = Product::findOrFail($id);
         $product->update($validatedData);
 
-        return response()->json(['message' => 'Product updated successfully', 'product' => new ProductResource($product)], Response::HTTP_OK);
+        return response()->json(['message' => 'Product updated successfully', 'product' 
+        => new ProductResource($product)]);
     }
 
     public function destroy($id)
