@@ -73,6 +73,6 @@ public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->delete();
         
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Product deleted successfully'], 204);
     }
 }

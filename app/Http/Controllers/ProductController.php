@@ -55,9 +55,9 @@ class ProductController extends Controller
         => new ProductResource($product)]);
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
+        
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully'], Response::HTTP_NO_CONTENT);
