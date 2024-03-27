@@ -60,6 +60,6 @@ class ProductController extends Controller
         
         $product->delete();
 
-        return response()->json(['message' => 'Product deleted successfully'], Response::HTTP_NO_CONTENT);
+        return response()->json(['message' => 'Product deleted successfully'], 204);
     }
 }
