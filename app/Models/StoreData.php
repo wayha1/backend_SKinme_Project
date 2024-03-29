@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class StoreData extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "titel",
+        "description",
+        "data_image",
+        "data_video",
+        "data_url",
+    ];
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StoreDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     
     Route::apiResource('product', ProductController::class); 
     Route::apiResource('category', CategoryController::class);
+    Route::apiResource('storedata', StoreDataController::class);
 });
 
 // Route::middleware('auth:sanctum')->group(function(){
