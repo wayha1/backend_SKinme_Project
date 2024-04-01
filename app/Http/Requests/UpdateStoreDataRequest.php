@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Store_StoreDataRequest extends FormRequest
+class UpdateStoreDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class Store_StoreDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ['required', 'string','max:100'],
-            "description" => ['nullable', 'string',"max:255"],
-            "data_image"=>  ['nullable', 'string',"max:255"],
-            "data_video"=>  ['nullable', 'string',"max:255"],
-            "data_url"=>  ['nullable', 'string',"max:255"],
+            "title" => "sometimes|required|string|max:100",
+            "description" => "sometimes|nullable|string|max:255",
+            "data_image"=> "sometimes|nullable|string|max:255",
+            "data_video"=> "sometimes|nullable|string|max:255",
+            "data_url"=> "sometimes|nullable|string|max:255", 
         ];
     }
 }

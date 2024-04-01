@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('store_data', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('title');
             $table->string('description')->nullable();
             $table->string('data_image')->nullable();
             $table->string('data_video')->nullable();

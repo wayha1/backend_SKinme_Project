@@ -23,14 +23,14 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'product_name' => 'sometimes|required|string|max:100',
-            'product_description' => 'nullable|string|max:255',
+            'product_description' => 'sometimes|nullable|string|max:255',
             'product_price' => 'sometimes|required|numeric',
             'product_stock' => 'sometimes|required|integer',
             'product_rating' => 'sometimes|required|numeric|min:0|max:5',
-            'product_feedback' => 'nullable|string|max:255',
-            'product_image' => 'nullable|string|max:255',
-            'product_review' => 'nullable|string|max:255',
-            'product_banner' => 'nullable|string|max:255',
+            'product_feedback' => 'sometimes|nullable|string|max:255',
+            'product_image' => 'sometimes|nullable|string|max:255',
+            'product_review' => 'sometimes|nullable|string|max:255',
+            'product_banner' => 'sometimes|nullable|string|max:255',
             'category_id' => 'sometimes|required|exists:categories,id',
         ];
     }

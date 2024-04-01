@@ -9,7 +9,7 @@ class StoreData extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "titel",
+        "title",
         "description",
         "data_image",
         "data_video",

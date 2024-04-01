@@ -9,7 +9,6 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -45,15 +44,21 @@ class ProductController extends Controller
 
     
 
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        $validatedData = $request->validated();
+    public function update(UpdateProductRequest $request, $id)
+{
+    // Find the product by its ID
+    $product = Product::findOrFail($id);
 
-        $product->update($validatedData);
+    // Validate the incoming request
+    $validatedData = $request->validated();
 
-        return response()->json(['message' => 'Product updated successfully', 'product' 
-        => new ProductResource($product)]);
-    }
+    // Update the product with the validated data
+    $product->update($validatedData);
+
+    // Return a JSON response indicating success with the updated product resource
+    return response()->json(['message' => 'Product updated successfully', 'product' => new ProductResource($product)]);
+}
+
 
     public function destroy(Product $product)
     {
