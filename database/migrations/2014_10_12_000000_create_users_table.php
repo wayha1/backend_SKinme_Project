@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->boolean('is_active')->default(false);
             $table->string('user_image')->nullable();
+            $table->string('phone_number');
             $table->rememberToken();
             $table->timestamps();
         });

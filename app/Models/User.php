@@ -26,6 +26,7 @@ class User extends Authenticatable
         'gender',  
         'is_active',
         'user_image',
+        'phone_number'
     ];
 
     /**
