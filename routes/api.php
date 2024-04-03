@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('product', ProductController::class); 
     Route::apiResource('storedata', StoreDataController::class);
+    Route::apiResource('userhistory', ProductController::class);
 });
 
 // Route::middleware('auth:sanctum')->group(function(){
