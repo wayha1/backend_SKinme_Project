@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('logistic', function (Blueprint $table) {
             $table->id();
+            $table->string('logistic_name');
+            $table->string('deliver_name');
+            $table->string('date_delivery');
             $table->timestamps();
         });
     }

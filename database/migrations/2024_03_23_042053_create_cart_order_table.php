@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('cart_order', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->integer('user_id')->constrained()->onDelete('cascade');
+            $table->integer('product_id')->constrained()->onDelete('cascade');
+            $table->string('action');
+            $table->string('action_detail');
             $table->timestamps();
         });
     }

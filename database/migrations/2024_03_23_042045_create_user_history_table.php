@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_history', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('product_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('action');
             $table->string('action_detail');
             $table->timestamps();

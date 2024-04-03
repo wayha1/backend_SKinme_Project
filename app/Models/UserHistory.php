@@ -9,10 +9,10 @@ class UserHistory extends Model
 {
     use HasFactory;
     protected $fillable = [
-    "user_id",
-    "product_id",
-    "action",
-    "action_details",
+        "user_id",
+        "product_id",
+        "action",
+        "action_detail", 
     ];
 
     public function user()
