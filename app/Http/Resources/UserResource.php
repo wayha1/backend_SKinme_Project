@@ -15,19 +15,20 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id"=> $this->id,
-            "name"=> $this->name,   
-            "email"=> $this->email,
-            "email_verified_at"=> $this->email_verified_at,
-            "password"=> $this->password,
-            "google_id"=> $this->google_id,
-            "gender"=> $this->gender,
-            "is_active"=> $this->is_active,
-            "user_image"=> $this->user_image,
-            "phone_number"=> $this->phone_number,
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'email_verified_at' => $this->email_verified_at,
+            'google_id' => $this->google_id,
+            'gender' => $this->gender,
+            'is_active' => $this->is_active,
+            'user_image' => $this->user_image,
+            'phone_number' => $this->phone_number,
             'status' => $this->is_done ? 'finished' : 'open',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            // Avoid exposing sensitive information like password
+            // 'password' => $this->password,
         ];
     }
 }

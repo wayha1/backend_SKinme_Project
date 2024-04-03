@@ -27,7 +27,7 @@ class ProductResource extends JsonResource
             'product_review' => $this->product_review,
             'product_banner' => $this->product_banner,
             'category_id' => $this->category_id,
-            'category' => new CategoryResource($this->whenLoaded('category')), // Assuming you have defined CategoryResource
+            'category' => new CategoryResource($this->whenLoaded('category')), 
             'status' => $this->is_done ? 'finished' : 'open',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
