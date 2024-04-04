@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'is_active' => $this->is_active,
             'user_image' => $this->user_image,
             'phone_number' => $this->phone_number,
+            'user_address'=> $this->user_address,
             'status' => $this->is_done ? 'finished' : 'open',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

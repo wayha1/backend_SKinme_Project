@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,22 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        // Check if user property is set and not null
+        if ($this->user) {
+            return [
+                "name" => "sometimes|required|string|max:100",
+                "email" => "sometimes|required|string|email|max:255|unique:users,email," . $this->user->id,
+                "email_verified_at" => "sometimes|nullable|date",
+                "google_id" => "sometimes|nullable|string|max:255",
+                "gender" => "sometimes|nullable|string|max:10",
+                "is_active" => "sometimes|boolean",
+                "user_image" => "sometimes|nullable|string|max:255",
+                "phone_number" => "sometimes|nullable|string|max:25",
+                "user_address" => "sometimes|nullable|string|max:255",
+            ];
+        }
+
+        // If user property is null, return empty rules array
+        return [];
     }
 }
