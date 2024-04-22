@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('user_payment', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->constrained()
+            ->onDelete('cascade');
+            $table->integer('product_id')->constrained()
+            ->onDelete('cascade');
+            
+            $table->string('card_number');
+            $table->string('card_holder_name');
+            $table->string('expiration_date');
+            $table->string('cvv');
+            $table->double('total_price');
+            
             $table->timestamps();
         });
     }

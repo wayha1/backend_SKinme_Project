@@ -37,4 +37,8 @@ class Product extends Model
     {
         return $this->hasMany(UserHistory::class);
     }
+    public function userPayment(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
