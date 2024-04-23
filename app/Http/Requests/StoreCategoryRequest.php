@@ -23,7 +23,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             "category_title" => "required|max:50",
-            "category_icon"=> "nullable|max:255",
+            "category_icon"=> "nullable|mimes:png,jpg,jpeg,webp",
             //
         ];
     }

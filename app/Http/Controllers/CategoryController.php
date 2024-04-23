@@ -7,9 +7,12 @@ use App\Http\Requests\StoreCategoryRequest; // Assuming a separate request for s
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Providers\CloudinaryService;
+use CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class CategoryController extends Controller
 {
@@ -36,16 +39,19 @@ class CategoryController extends Controller
     {
         $validated = $request->validated();
 
+        // Upload category icon to Cloudinary if provided
+        if ($request->hasFile('category_icon')) {
+            $uploadedFile = CloudinaryService::upload($request->file('category_icon'));
+            $validated['category_icon'] = $uploadedFile['secure_url'];
+        }
+
         // If you want to associate the category with the authenticated user
         $validated['user_id'] = Auth::id();
 
         $category = Category::create($validated);
 
-        return response()->json(['message' => 'Category created successfully', 'category' 
-        => new CategoryResource($category)]);
+        return response()->json(['message' => 'Category created successfully', 'category' => new CategoryResource($category)]);
     }
-    
-
     
 
     /**
@@ -57,11 +63,16 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $validated = $request->validated();
-    
+
+        // Upload category icon to Cloudinary if provided
+        if ($request->hasFile('category_icon')) {
+            $uploadedFile = CloudinaryService::upload($request->file('category_icon'));
+            $validated['category_icon'] = $uploadedFile['secure_url'];
+        }
+
         $category->update($validated);
-    
-        return response()->json(['message' => 'Category updated successfully', 'category'
-        => new CategoryResource($category)]);
+
+        return response()->json(['message' => 'Category updated successfully', 'category' => new CategoryResource($category)]);
     }
 
 

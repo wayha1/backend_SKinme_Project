@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'category_title' => 'sometimes|required|string|max:50',
-            'category_icon' => 'sometimes|nullable|string|max:255',
+            'category_icon' => 'sometimes|nullable|"category_icon"=> "nullable|mimes:png,jpg,jpeg,webp"',
         ];
     }
 }
