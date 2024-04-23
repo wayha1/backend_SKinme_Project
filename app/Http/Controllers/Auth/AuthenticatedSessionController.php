@@ -45,4 +45,11 @@ class AuthenticatedSessionController extends Controller
 
         return response()->noContent();
     }
+    // public function logout(Request $request)
+    // {
+    //     $request->user()->currentAccessToken()->delete();
+    //     return response()->json([
+    //         'message'=> 'Logged Out success'
+    //     ]);
+    // }
 }
