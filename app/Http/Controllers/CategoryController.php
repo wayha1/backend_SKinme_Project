@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Http\Requests\StoreCategoryRequest; // Assuming a separate request for store
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Providers\CloudinaryService;
-use CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider;
-use GuzzleHttp\Psr7\Response;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class CategoryController extends Controller
 {
@@ -24,6 +20,7 @@ class CategoryController extends Controller
         $categories = Category::paginate(10);
         return new CategoryCollection($categories);
     }
+    
     /**
      * Display the specified resource.
      */
@@ -45,21 +42,18 @@ class CategoryController extends Controller
             $validated['category_icon'] = $uploadedFile['secure_url'];
         }
 
-        // If you want to associate the category with the authenticated user
+        // Associate the category with the authenticated user
         $validated['user_id'] = Auth::id();
 
         $category = Category::create($validated);
 
-        return response()->json(['message' => 'Category created successfully', 'category' => new CategoryResource($category)]);
+        return response()->json(['message' => 'Category created successfully', 
+            'category' => new CategoryResource($category)]);
     }
-    
 
     /**
      * Update the specified resource in storage.
      */
-    /**
- * Update the specified resource in storage.
- */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $validated = $request->validated();
@@ -72,9 +66,9 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return response()->json(['message' => 'Category updated successfully', 'category' => new CategoryResource($category)]);
+        return response()->json(['message' => 'Category updated successfully', 
+            'category' => new CategoryResource($category)]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -83,6 +77,6 @@ class CategoryController extends Controller
     {
         $category->delete();
         
-        return response()->json(['message' => 'Product deleted successfully'], 204);
+        return response()->json(['message' => 'Category deleted successfully'], 204);
     }
 }

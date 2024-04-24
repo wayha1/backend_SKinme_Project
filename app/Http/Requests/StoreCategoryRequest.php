@@ -22,9 +22,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "category_title" => "required|max:50",
-            "category_icon"=> "nullable|mimes:png,jpg,jpeg,webp",
-            //
+            "category_title" => "required|string|max:50",
+            "category_icon" => "nullable|mimes:png,jpg,jpeg,webp", // Adjust max file size as needed
         ];
     }
 }
