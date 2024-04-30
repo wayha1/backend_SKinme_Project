@@ -25,8 +25,8 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'gender' => ['nullable', 'max:12'],
-            'is_active' => ['boolean'],
-            'is_admin' => ['boolean']
+            'is_active' => ['boolean', 'nullable'],
+            'role' => ['nullable','max:12' ]
         ]);
 
         $user = User::create([
@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'gender' => $request->gender,
             'is_active' => $request->is_active, // Assigning actual value from request
-            'is_admin' => $request->is_admin,   // Assigning actual value from request
+            'role' => $request->role,   // Assigning actual value from request
         ]);
 
         event(new Registered($user));
