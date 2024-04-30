@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('google_id')->nullable();
             $table->string('gender')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->boolean('is_active')->default(false);
             $table->string('user_image')->nullable();
             $table->string('phone_number')->nullable();
