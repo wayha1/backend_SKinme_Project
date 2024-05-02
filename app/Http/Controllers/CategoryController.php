@@ -7,8 +7,8 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use App\Providers\CloudinaryService;
 use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CategoryController extends Controller
 {
@@ -38,8 +38,8 @@ class CategoryController extends Controller
 
         // Upload category icon to Cloudinary if provided
         if ($request->hasFile('category_icon')) {
-            $uploadedFile = CloudinaryService::upload($request->file('category_icon'));
-            $validated['category_icon'] = $uploadedFile['secure_url'];
+            $uploadedFileUrl = $this->uploadFileToCloudinary($request->file('category_icon'));
+            $validated['category_icon'] = $uploadedFileUrl;
         }
 
         // Associate the category with the authenticated user
@@ -60,8 +60,8 @@ class CategoryController extends Controller
 
         // Upload category icon to Cloudinary if provided
         if ($request->hasFile('category_icon')) {
-            $uploadedFile = CloudinaryService::upload($request->file('category_icon'));
-            $validated['category_icon'] = $uploadedFile['secure_url'];
+            $uploadedFileUrl = $this->uploadFileToCloudinary($request->file('category_icon'));
+            $validated['category_icon'] = $uploadedFileUrl;
         }
 
         $category->update($validated);
@@ -78,5 +78,14 @@ class CategoryController extends Controller
         $category->delete();
         
         return response()->json(['message' => 'Category deleted successfully'], 204);
+    }
+
+    /**
+     * Uploads a file to Cloudinary and returns the URL.
+     */
+    private function uploadFileToCloudinary($file)
+    {
+        $uploadedFile = Cloudinary::upload($file->getRealPath())->getSecurePath();
+        return $uploadedFile;
     }
 }
