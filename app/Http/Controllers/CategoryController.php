@@ -8,7 +8,8 @@ use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -34,21 +35,35 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validated();
-
-        // Upload category icon to Cloudinary if provided
-        if ($request->hasFile('category_icon')) {
-            $uploadedFileUrl = $this->uploadFileToCloudinary($request->file('category_icon'));
-            $validated['category_icon'] = $uploadedFileUrl;
+        try {
+            // Include the path of the stored category icon in the validated data
+            $validated = $request->validated();
+            
+            // Check if an image file is provided in the request
+            if ($request->hasFile('category_icon')) {
+                $file = $request->file('category_icon');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $path = 'assets/category/';
+                $file->move(public_path($path), $filename);
+                $validated['category_icon'] = $path . $filename;
+            }
+            
+            // Associate the category with the authenticated user
+            $validated['user_id'] = Auth::id();
+            
+            // Create the category
+            $category = Category::create($validated);
+            
+            return response()->json([
+                'message' => 'Category created successfully', 
+                'category' => new CategoryResource($category)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went really wrong'
+            ], 500);
         }
-
-        // Associate the category with the authenticated user
-        $validated['user_id'] = Auth::id();
-
-        $category = Category::create($validated);
-
-        return response()->json(['message' => 'Category created successfully', 
-            'category' => new CategoryResource($category)]);
     }
 
     /**
@@ -58,12 +73,13 @@ class CategoryController extends Controller
     {
         $validated = $request->validated();
 
-        // Upload category icon to Cloudinary if provided
+        // Check if an image file is being uploaded
         if ($request->hasFile('category_icon')) {
-            $uploadedFileUrl = $this->uploadFileToCloudinary($request->file('category_icon'));
-            $validated['category_icon'] = $uploadedFileUrl;
+            // Handle file upload similarly as in the store method
+            // ...
         }
 
+        // Update the category
         $category->update($validated);
 
         return response()->json(['message' => 'Category updated successfully', 
@@ -78,14 +94,5 @@ class CategoryController extends Controller
         $category->delete();
         
         return response()->json(['message' => 'Category deleted successfully'], 204);
-    }
-
-    /**
-     * Uploads a file to Cloudinary and returns the URL.
-     */
-    private function uploadFileToCloudinary($file)
-    {
-        $uploadedFile = Cloudinary::upload($file->getRealPath())->getSecurePath();
-        return $uploadedFile;
     }
 }

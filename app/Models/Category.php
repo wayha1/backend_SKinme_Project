@@ -19,4 +19,8 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function videosTending(): HasMany
+    {
+        return $this->hasMany(VideoTrending::class);
+    }
 }

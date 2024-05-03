@@ -34,6 +34,15 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $path = 'assets/products/';
+            $file->move(public_path($path), $filename);
+            $validatedData['product_image'] = $path . $filename;
+        }
+
         $validatedData['user_id'] = Auth::id();
 
         $product = Product::create($validatedData);
