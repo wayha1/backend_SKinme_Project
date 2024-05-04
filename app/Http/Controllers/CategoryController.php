@@ -75,8 +75,12 @@ class CategoryController extends Controller
 
         // Check if an image file is being uploaded
         if ($request->hasFile('category_icon')) {
-            // Handle file upload similarly as in the store method
-            // ...
+            $file = $request->file('category_icon');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $path = 'assets/category/';
+            $file->move(public_path($path), $filename);
+            $validated['category_icon'] = $path . $filename;
         }
 
         // Update the category
