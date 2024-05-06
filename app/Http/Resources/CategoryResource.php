@@ -18,6 +18,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'category_title' => $this->category_title,
             'category_icon' => $this->category_icon,
+            
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'videos' => VideoTrendingResource::collection($this->whenLoaded('videos')),
             'created_at' => $this->created_at,

@@ -64,29 +64,38 @@ class CategoryController extends Controller
             ], 500);
         }
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        $validated = $request->validated();
+        try {
+            // Find the category by its ID
+            $category = Category::findOrFail($id);
 
-        // Check if an image file is being uploaded
-        if ($request->hasFile('category_icon')) {
-            $file = $request->file('category_icon');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $path = 'assets/category/';
-            $file->move(public_path($path), $filename);
-            $validated['category_icon'] = $path . $filename;
+            // Validate the incoming request
+            $validated = $request->validated();
+            
+            // Check if an image file is being uploaded
+            if ($request->hasFile('category_icon')) {
+                $path = 'assets/category/';
+                $filename = time() . '.' . $request->file('category_icon')->getClientOriginalExtension();
+                $request->file('category_icon')->move(public_path($path), $filename);
+                $validated['category_icon'] = $path . $filename;
+            }
+
+            // Update the category
+            $category->update($validated);
+
+            return response()->json([
+                'message' => 'Category updated successfully', 
+                'category' => new CategoryResource($category)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went really wrong: ' . $e->getMessage()
+            ], 500);
         }
-
-        // Update the category
-        $category->update($validated);
-
-        return response()->json(['message' => 'Category updated successfully', 
-            'category' => new CategoryResource($category)]);
     }
 
     /**

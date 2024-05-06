@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,19 +51,19 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product created successfully', 'product' => new ProductResource($product)]);
     }
 
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $updateProductRequest ,$id)
     {
         $product = Product::findOrFail($id);
-        $validatedData = $request->validated();
+        $validatedData = $updateProductRequest->validated();
 
         // Handle product image update
-        if ($request->hasFile('product_image')) {
-            $validatedData['product_image'] = $this->uploadImage($request->file('product_image'));
+        if ($updateProductRequest->hasFile('product_image')) {
+            $validatedData['product_image'] = $this->uploadImage($updateProductRequest->file('product_image'));
         }
 
         // Handle product banner update
-        if ($request->hasFile('product_banner')) {
-            $validatedData['product_banner'] = $this->uploadImage($request->file('product_banner'));
+        if ($updateProductRequest->hasFile('product_banner')) {
+            $validatedData['product_banner'] = $this->uploadImage($updateProductRequest->file('product_banner'));
         }
         // Handle product review (video) update
         // if ($request->hasFile('product_review')) {
@@ -71,7 +72,8 @@ class ProductController extends Controller
 
         $product->update($validatedData);
 
-        return response()->json(['message' => 'Product updated successfully', 'product' => new ProductResource($product)]);
+        return response()->json(['message' => 'Product updated successfully',
+         'product' => new ProductResource($product)]);
     }
 
     public function destroy(Product $product)
