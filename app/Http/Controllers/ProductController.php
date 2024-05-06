@@ -36,6 +36,10 @@ class ProductController extends Controller
             $validatedData['product_banner'] = $this->uploadImage($request->file('product_banner'));
         }
 
+        if ($request->hasFile('product_review')) {
+            $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
+        }
+
         $validatedData['user_id'] = Auth::id();
 
         $product = Product::create($validatedData);
@@ -57,6 +61,10 @@ class ProductController extends Controller
         if ($request->hasFile('product_banner')) {
             $validatedData['product_banner'] = $this->uploadImage($request->file('product_banner'));
         }
+        // Handle product review (video) update
+        if ($request->hasFile('product_review')) {
+            $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
+        }
 
         $product->update($validatedData);
 
@@ -75,6 +83,14 @@ class ProductController extends Controller
         $extension = $file->getClientOriginalExtension();
         $filename = time() . '.' . $extension;
         $path = 'assets/products/';
+        $file->move(public_path($path), $filename);
+        return $path . $filename;
+    }
+    private function uploadVideo($file)
+    {
+        $extension = $file->getClientOriginalExtension();
+        $filename = time() . '.' . $extension;
+        $path = 'assets/videos/';
         $file->move(public_path($path), $filename);
         return $path . $filename;
     }

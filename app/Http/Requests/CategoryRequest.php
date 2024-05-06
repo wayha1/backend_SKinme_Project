@@ -23,7 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'category_title' => ['required', 'string', 'max:50'],
-            'category_icon' => ['nullable', 'max:2048'], // Max file size in kilobytes (2MB)
+            'category_icon' => ['nullable', 'max:2048'],
             'products' => ProductRequest::collection($this->whenLoaded('products')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

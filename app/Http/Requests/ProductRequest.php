@@ -34,6 +34,8 @@ class ProductRequest extends FormRequest
             
             // Adding validation for the new foreign key column
             'category_id' => ['required', 'exists:categories,id'],
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

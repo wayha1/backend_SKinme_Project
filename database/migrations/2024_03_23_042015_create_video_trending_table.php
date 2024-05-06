@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('video_trending', function (Blueprint $table) {
+        Schema::create('video_trendings', function (Blueprint $table) {
             $table->id();
             // Adding the foreign key column
             $table->foreignId('category_id')->constrained()
