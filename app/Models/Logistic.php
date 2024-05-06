@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Logistic extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'logistic_name',
+        'deliver_name',
+        'date_delivery'
+    ];
 }

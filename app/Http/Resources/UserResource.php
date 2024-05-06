@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'google_id' => $this->google_id,
             'gender' => $this->gender,
             'is_active' => $this->is_active == true? 1:0,
+            'role' => $this ->role,
             'user_image' => $this->user_image,
             'phone_number' => $this->phone_number,
             'user_address'=> $this->user_address,

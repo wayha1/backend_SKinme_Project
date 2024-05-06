@@ -13,12 +13,15 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        // Eager load the category relationship
+        $products = Product::with('categories')->paginate(10);
         return ProductResource::collection($products);
     }
 
+
     public function show(Product $product)
     {
+        $product->load('category');
         return new ProductResource($product);
     }
 
@@ -36,9 +39,9 @@ class ProductController extends Controller
             $validatedData['product_banner'] = $this->uploadImage($request->file('product_banner'));
         }
 
-        if ($request->hasFile('product_review')) {
-            $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
-        }
+        // if ($request->hasFile('product_review')) {
+        //     $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
+        // }
 
         $validatedData['user_id'] = Auth::id();
 
@@ -62,9 +65,9 @@ class ProductController extends Controller
             $validatedData['product_banner'] = $this->uploadImage($request->file('product_banner'));
         }
         // Handle product review (video) update
-        if ($request->hasFile('product_review')) {
-            $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
-        }
+        // if ($request->hasFile('product_review')) {
+        //     $validatedData['product_review'] = $this->uploadVideo($request->file('product_review'));
+        // }
 
         $product->update($validatedData);
 

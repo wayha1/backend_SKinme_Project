@@ -10,7 +10,7 @@ class VideoTrending extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "category_id",
+       
         "video_title1",
         "video1",
         "video_title2",
@@ -21,10 +21,11 @@ class VideoTrending extends Model
         "video4",
         "video_title5",
         "video5",
+        "category_id",
     ];
 
     public function categories(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

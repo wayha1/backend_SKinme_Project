@@ -15,7 +15,7 @@ class VideoTrendingController extends Controller
 {
     public function index(Request $request)
     {
-        $videos = VideoTrending::paginate(10);
+        $videos = VideoTrending::with('categories')->paginate(10);
 
         return VideoTrendingResource::collection($videos);
     }

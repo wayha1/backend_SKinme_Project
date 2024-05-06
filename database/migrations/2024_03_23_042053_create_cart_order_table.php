@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->constrained()->onDelete('cascade');
             $table->integer('product_id')->constrained()->onDelete('cascade');
-            $table->string('action');
-            $table->string('action_detail');
+            $table->string('action')->nullable();
+            $table->string('action_detail')->nullable();
             $table->timestamps();
         });
     }

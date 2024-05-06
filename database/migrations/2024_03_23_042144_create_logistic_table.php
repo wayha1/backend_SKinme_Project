@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('logistic_name');
             $table->string('deliver_name');
-            $table->string('date_delivery');
+            $table->dateTime('date_delivery');
             $table->timestamps();
         });
     }

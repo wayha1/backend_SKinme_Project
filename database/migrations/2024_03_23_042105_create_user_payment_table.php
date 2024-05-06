@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('expiration_date');
             $table->string('cvv');
             $table->double('total_price');
-            
             $table->timestamps();
         });
     }

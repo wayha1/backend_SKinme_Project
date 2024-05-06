@@ -16,9 +16,6 @@ class VideoTrendingResource extends JsonResource
     {
         return [
             'id' => $this -> id,
-            'category_id' => $this->category_id,
-            'category' => new CategoryResource($this->whenLoaded('category')),
-
             'video_title1' => $this -> video_title1,
             'video1' => $this -> video1,
             'video_title2' => $this -> video_title2,
@@ -29,6 +26,9 @@ class VideoTrendingResource extends JsonResource
             'video4' => $this -> video4,
             'video_title5' => $this -> video_title5,
             'video5' => $this -> video5,
+            // 'category_id' => $this->category_id,
+            'categories' => new CategoryResource($this->whenLoaded('categories')),
+
             
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
