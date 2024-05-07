@@ -22,7 +22,7 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_title' => ['required', 'string', 'max:50'],
+            'category_title' => ['required', 'max:50'],
             'category_icon' => ['nullable', 'max:2048'],
             'products' => ProductRequest::collection($this->whenLoaded('products')),
             'created_at' => $this->created_at,

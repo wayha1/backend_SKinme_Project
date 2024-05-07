@@ -22,17 +22,17 @@ class UpdateVideoTrendingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => ['required', 'exists:categories,id'],
-            'video_title1' => ['required', 'string', 'max:100'],
-            'video1' => ['required', 'string', 'max:100'],
-            'video_title2' => ['nullable', 'string', 'max:100'],
-            'video2' => ['nullable', 'string', 'max:100'],
-            'video_title3' => ['nullable', 'string', 'max:100'],
-            'video3' => ['nullable', 'string', 'max:100'],
-            'video_title4' => ['nullable', 'string', 'max:100'],
-            'video4' => ['nullable', 'string', 'max:100'],
-            'video_title5' => ['nullable', 'string', 'max:100'],
-            'video5' => ['nullable', 'string', 'max:100'],
+            'category_id' => ['sometimes','required', 'exists:categories,id'],
+            'video_title1' => ['sometimes','required', 'string', 'max:100'],
+            'video1' => ['sometimes','required', 'string', 'max:100'],
+            'video_title2' => ['sometimes','nullable', 'string', 'max:100'],
+            'video2' => ['sometimes','nullable', 'string', 'max:100'],
+            'video_title3' => ['sometimes','nullable', 'string', 'max:100'],
+            'video3' => ['sometimes','nullable', 'string', 'max:100'],
+            'video_title4' => ['sometimes','nullable', 'string', 'max:100'],
+            'video4' => ['sometimes','nullable', 'string', 'max:100'],
+            'video_title5' => ['sometimes','nullable', 'string', 'max:100'],
+            'video5' => ['sometimes','nullable', 'string', 'max:100'],
         ];
     }
 }

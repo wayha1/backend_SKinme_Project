@@ -22,8 +22,9 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_title' => 'sometimes|required|max:50',
-            'category_icon' => 'sometimes|nullable|mimes:png,jpg,jpeg,webp', 
+            'category_title' => ['sometimes','required','max:50'],
+            'category_icon' => ['sometimes','nullable','max:2048']
+            
         ];
     }
 }

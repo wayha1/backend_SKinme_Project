@@ -20,7 +20,6 @@ class CategoryController extends Controller
         $categories = Category::with('products')->paginate(10);
         return new CategoryCollection($categories);
     }
-    
     /**
      * Display the specified resource.
      */
@@ -47,11 +46,8 @@ class CategoryController extends Controller
                 $file->move(public_path($path), $filename);
                 $validated['category_icon'] = $path . $filename;
             }
-            
             // Associate the category with the authenticated user
             $validated['user_id'] = Auth::id();
-            
-            // Create the category
             $category = Category::create($validated);
             
             return response()->json([
@@ -67,12 +63,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
-            // Find the category by its ID
-            $category = Category::findOrFail($id);
-
             // Validate the incoming request
             $validated = $request->validated();
             
@@ -83,20 +76,24 @@ class CategoryController extends Controller
                 $request->file('category_icon')->move(public_path($path), $filename);
                 $validated['category_icon'] = $path . $filename;
             }
-
+    
             // Update the category
             $category->update($validated);
 
+            // return response() -> noContent();
             return response()->json([
                 'message' => 'Category updated successfully', 
                 'category' => new CategoryResource($category)
             ]);
+            
         } catch (\Exception $e) {
+            // Handle any exceptions
             return response()->json([
-                'message' => 'Something went really wrong: ' . $e->getMessage()
+                'message' => 'Something went wrong while updating the category: ' . $e->getMessage()
             ], 500);
         }
     }
+    
 
     /**
      * Remove the specified resource from storage.
