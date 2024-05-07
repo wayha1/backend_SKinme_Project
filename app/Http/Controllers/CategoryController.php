@@ -33,20 +33,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        try {
-            // Include the path of the stored category icon in the validated data
+      
             $validated = $request->validated();
-            
-            // Check if an image file is provided in the request
-            if ($request->hasFile('category_icon')) {
-                $file = $request->file('category_icon');
-                $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
-                $path = 'assets/category/';
-                $file->move(public_path($path), $filename);
-                $validated['category_icon'] = $path . $filename;
-            }
-            // Associate the category with the authenticated user
             $validated['user_id'] = Auth::id();
             $category = Category::create($validated);
             
@@ -54,11 +42,6 @@ class CategoryController extends Controller
                 'message' => 'Category created successfully', 
                 'category' => new CategoryResource($category)
             ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went really wrong'
-            ], 500);
-        }
     }
     /**
      * Update the specified resource in storage.

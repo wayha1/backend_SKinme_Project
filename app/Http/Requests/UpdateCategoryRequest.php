@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'category_title' => ['required','string','max:50'],
-            'category_icon' => ['sometimes','max:2048']
+            'category_icon' => ['sometimes','max:255']
             
         ];
     }
