@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('product_description')->nullable();
             $table->float('product_price');
             $table->integer('product_stock');
-            $table->float('product_rating');
+            $table->float('product_rating')->nullable();
             $table->string('product_feedback')->nullable();
             $table->string('product_image')->nullable();
             $table->string('product_review')->nullable();

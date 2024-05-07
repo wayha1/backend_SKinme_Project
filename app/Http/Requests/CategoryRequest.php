@@ -23,7 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'category_title' => ['required', 'max:50'],
-            'category_icon' => ['nullable', 'max:2048'],
+            'category_icon' => ['nullable', 'max:255'],
             'products' => ProductRequest::collection($this->whenLoaded('products')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
