@@ -65,36 +65,25 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        try {
-            // Validate the incoming request
-            $validated = $request->validated();
-            
+       
             // Check if an image file is being uploaded
-            if ($request->hasFile('category_icon')) {
-                $path = 'assets/category/';
-                $filename = time() . '.' . $request->file('category_icon')->getClientOriginalExtension();
-                $request->file('category_icon')->move(public_path($path), $filename);
-                $validated['category_icon'] = $path . $filename;
-            }
+            // if ($request->hasFile('category_icon')) {
+            //     $path = 'assets/category/';
+            //     $filename = time() . '.' . $request->file('category_icon')->getClientOriginalExtension();
+            //     $request->file('category_icon')->move(public_path($path), $filename);
+            //     $validated['category_icon'] = $path . $filename;
+            // }
     
             // Update the category
-            $category->update($validated);
-
-            // return response() -> noContent();
+            $category->update($request->validated());
+    
+            // Return a success response
             return response()->json([
                 'message' => 'Category updated successfully', 
                 'category' => new CategoryResource($category)
             ]);
-            
-        } catch (\Exception $e) {
-            // Handle any exceptions
-            return response()->json([
-                'message' => 'Something went wrong while updating the category: ' . $e->getMessage()
-            ], 500);
-        }
     }
     
-
     /**
      * Remove the specified resource from storage.
      */
