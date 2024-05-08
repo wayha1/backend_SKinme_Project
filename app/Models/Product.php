@@ -41,4 +41,8 @@ class Product extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    public function usercomment(): HasMany
+    {
+        return $this-> hasMany(UserComments::class);
+    }
 }

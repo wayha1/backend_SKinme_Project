@@ -9,6 +9,7 @@ use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreDataController;
+use App\Http\Controllers\UserCommentsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserHistoryController;
 use App\Http\Controllers\VideoTrendingController;
@@ -41,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('video', VideoTrendingController::class);
     Route::apiResource('userhistory', UserHistoryController::class);
+    Route::apiResource('usercomments', UserCommentsController::class);
     Route::apiResource('cart' , CartOrderController::class);
     Route::apiResource('payment', PaymentController::class);
     Route::apiResource('logistic', LogisticController::class);
