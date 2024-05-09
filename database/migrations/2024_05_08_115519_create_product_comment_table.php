@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_comment', function (Blueprint $table) {
+        Schema::create('product_comments', function (Blueprint $table) {
             $table->id();
+            
             $table->integer('user_id')->constrained()
             ->onDelete('cascade');
             $table->integer('product_id')->constrained()
             ->onDelete('cascade');
+            // $table->string('product_feedback');
             $table->timestamps();
         });
     }

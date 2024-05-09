@@ -12,13 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         // Eager load the category relationship
         $products = Product::with('categories')->paginate(20);
         return ProductResource::collection($products);
     }
-
 
     public function show(Product $product)
     {
