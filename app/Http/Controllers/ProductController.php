@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         // Eager load the category relationship
-        $products = Product::with('categories')->paginate(10);
+        $products = Product::with('categories')->paginate(20);
         return ProductResource::collection($products);
     }
 
