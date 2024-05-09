@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreDataController;
 use App\Http\Controllers\UserCommentsController;
@@ -41,8 +42,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('product', ProductController::class); 
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('video', VideoTrendingController::class);
+    Route::apiResource('productcomments', ProductCommentsController::class);
     Route::apiResource('userhistory', UserHistoryController::class);
-    Route::apiResource('usercomments', UserCommentsController::class);
     Route::apiResource('cart' , CartOrderController::class);
     Route::apiResource('payment', PaymentController::class);
     Route::apiResource('logistic', LogisticController::class);
