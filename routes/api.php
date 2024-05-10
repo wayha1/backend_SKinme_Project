@@ -16,7 +16,6 @@ use App\Http\Controllers\VideoTrendingController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VideoController;
 
 
 /*
@@ -42,7 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     });
     Route::apiResource('profile', UserController::class);
     Route::apiResource('storedata', StoreDataController::class);
-    Route::apiResource('video', VideoTrendingController::class);
+    // Route::apiResource('video', VideoTrendingController::class);
     Route::apiResource('productcomments', ProductCommentsController::class);
     Route::apiResource('userhistory', UserHistoryController::class);
     Route::apiResource('cart' , CartOrderController::class);
@@ -62,6 +61,13 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('product', [ProductController::class, 'store'])->middleware('auth:sanctum')->middleware(AdminMiddleware::class);;
     Route::put('product/{product}', [ProductController::class, 'update'])->middleware(['auth:sanctum']);
     Route::delete('product/{product}', [ProductController::class, 'destroy'])->middleware(['auth:sanctum']);
+    
+    Route::get('video', [VideoTrendingController::class, 'index']);
+    Route::post('video', [VideoTrendingController::class, 'store'])->middleware('auth:sanctum')->middleware(AdminMiddleware::class);;
+    Route::put('video/{video}', [VideoTrendingController::class, 'update'])->middleware(['auth:sanctum']);
+    Route::delete('video/{video}', [VideoTrendingController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+    
 
 
 
