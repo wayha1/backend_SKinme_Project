@@ -52,17 +52,8 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
 
-            // Check if an image file is being uploaded
-            // if ($request->hasFile('category_icon')) {
-            //     $path = 'assets/category/';
-            //     $filename = time() . '.' . $request->file('category_icon')->getClientOriginalExtension();
-            //     $request->file('category_icon')->move(public_path($path), $filename);
-            //     $validated['category_icon'] = $path . $filename;
-            // }
-
             // Update the category
             $category->update($request->validated());
-
             // Return a success response
             return response()->json([
                 'message' => 'Category updated successfully',
