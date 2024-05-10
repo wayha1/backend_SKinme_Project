@@ -13,17 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class VideoTrendingController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $videos = VideoTrending::with('categories')->paginate(10);
-
+        $videos = VideoTrending::with('categories')->paginate(20);
         return VideoTrendingResource::collection($videos);
     }
 
-    public function show(VideoTrending $videoTrending)
-    {
-        return new VideoTrendingResource($videoTrending);
-    }
 
     public function store(VideoTrendingRequest $request)
     {
@@ -32,7 +27,8 @@ class VideoTrendingController extends Controller
         $validatedData['user_id'] = Auth::id();
 
         $videoTrending = VideoTrending::create($validatedData);
-        return response()->json(['message' => 'Video trending created successfully', 'videoTrending' => new VideoTrendingResource($videoTrending)]);
+        return response()->json(['message' => 'Video trending created successfully', 'videoTrending'
+         => new VideoTrendingResource($videoTrending)]);
     }
 
     public function update(UpdateVideoTrendingRequest $request, VideoTrending $videoTrending, $id)

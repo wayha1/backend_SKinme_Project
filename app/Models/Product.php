@@ -12,6 +12,7 @@ class Product extends Model
     use HasFactory;
     protected $fillable = [
         "product_name",
+        "product_brand",
         "product_description",
         "product_price",
         "product_stock",
@@ -43,6 +44,6 @@ class Product extends Model
     }
     public function usercomment(): HasMany
     {
-        return $this-> hasMany(UserComments::class);
+        return $this-> hasMany(ProductComment::class);
     }
 }

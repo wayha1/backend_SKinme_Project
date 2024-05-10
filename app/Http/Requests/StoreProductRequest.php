@@ -23,7 +23,8 @@ class StoreProductRequest extends FormRequest
     {
         return [
             "product_name" => "required|max:100",
-            "product_description" => "nullable|string|max:255",
+            "product_brand"=> "required|max:255",
+            "product_description" => "nullable|string|max:500",
             "product_price" => "required",
             "product_stock" => "required",
             "product_rating" => "nullable",

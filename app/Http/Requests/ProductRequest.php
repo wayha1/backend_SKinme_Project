@@ -23,13 +23,14 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_name' => ['required', 'string', 'max:50'],
-            'product_description' => ['nullable', 'string', 'max:255'],
+            'product_name' => ['required', 'string', 'max:100'],
+            'product_brand' => ['required', 'string', 'max:255'],
+            'product_description' => ['nullable', 'string', 'max:500'],
             'product_price' => ['required', 'numeric'],
             'product_stock' => ['required', 'integer'],
             'product_rating' => ['required', 'numeric', 'min:0', 'max:5'],
             
-            'product_feedback' => ['nullable', 'string', 'max:255'],
+            'product_feedback' => ['nullable', 'string'],
             'product_comment' => UserCommentsRequest::collection($this->whenLoaded('product_comment')),
             
             'product_image' => ['nullable', 'string', 'max:255'],

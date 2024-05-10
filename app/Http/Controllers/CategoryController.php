@@ -17,26 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('products')->paginate(10);
+        $categories = Category::with('products')->get();
         return new CategoryCollection($categories);
         $categories = Category::all();
 
         return response()->json(['data' => $categories], 200);
     }
     /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        return new CategoryResource($category);
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCategoryRequest $request)
     {
-
             $validated = $request->validated();
             $validated['user_id'] = Auth::id();
             $category = Category::create($validated);
