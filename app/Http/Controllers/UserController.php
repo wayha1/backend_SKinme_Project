@@ -13,8 +13,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $profiles = User::where('is_active', true)->paginate(10); // Fetch all active users with pagination
-        return UserResource::collection($profiles);
+        $profiles = User::where('is_active', true)->paginate(20);
     }
 
     public function show(User $profile)

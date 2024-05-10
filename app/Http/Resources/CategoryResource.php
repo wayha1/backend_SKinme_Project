@@ -21,6 +21,7 @@ class CategoryResource extends JsonResource
             
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'videos' => VideoTrendingResource::collection($this->whenLoaded('videos')),
+
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
