@@ -16,7 +16,6 @@ use App\Http\Controllers\UserHistoryController;
 use App\Http\Controllers\VideoTrendingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\VideoController;
 
 
