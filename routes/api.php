@@ -16,6 +16,8 @@ use App\Http\Controllers\VideoTrendingController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VideoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,15 +35,13 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 
-                
 
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::apiResource('profile', UserController::class);
-    // Route::apiResource('category', CategoryController::class);
-    // Route::apiResource('product', ProductController::class); 
+
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('video', VideoTrendingController::class);
     Route::apiResource('productcomments', ProductCommentsController::class);
@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('logistic', LogisticController::class);
     Route::apiResource('bestproducts' , BestProductController::class);
     Route::apiResource('contactus' , ContactUsController::class);
+
 });
 
     Route::get('category', [CategoryController::class, 'index']);

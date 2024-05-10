@@ -19,6 +19,9 @@ class CategoryController extends Controller
     {
         $categories = Category::with('products')->get();
         return new CategoryCollection($categories);
+        $categories = Category::all();
+
+        return response()->json(['data' => $categories], 200);
     }
     /**
      * Store a newly created resource in storage.
@@ -28,9 +31,9 @@ class CategoryController extends Controller
             $validated = $request->validated();
             $validated['user_id'] = Auth::id();
             $category = Category::create($validated);
-            
+
             return response()->json([
-                'message' => 'Category created successfully', 
+                'message' => 'Category created successfully',
                 'category' => new CategoryResource($category)
             ]);
     }
@@ -39,23 +42,25 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-    
+
             // Update the category
             $category->update($request->validated());
             // Return a success response
             return response()->json([
-                'message' => 'Category updated successfully', 
+                'message' => 'Category updated successfully',
                 'category' => new CategoryResource($category)
             ]);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category)
     {
         $category->delete();
-        
+
         return response()->json(['message' => 'Category deleted successfully'], 204);
     }
+
+
 }
