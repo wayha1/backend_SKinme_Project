@@ -19,6 +19,9 @@ class CategoryController extends Controller
     {
         $categories = Category::with('products')->paginate(10);
         return new CategoryCollection($categories);
+        $categories = Category::all();
+
+        return response()->json(['data' => $categories], 200);
     }
     /**
      * Display the specified resource.
@@ -33,13 +36,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-      
+
             $validated = $request->validated();
             $validated['user_id'] = Auth::id();
             $category = Category::create($validated);
-            
+
             return response()->json([
-                'message' => 'Category created successfully', 
+                'message' => 'Category created successfully',
                 'category' => new CategoryResource($category)
             ]);
     }
@@ -48,7 +51,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-       
+
             // Check if an image file is being uploaded
             // if ($request->hasFile('category_icon')) {
             //     $path = 'assets/category/';
@@ -56,24 +59,26 @@ class CategoryController extends Controller
             //     $request->file('category_icon')->move(public_path($path), $filename);
             //     $validated['category_icon'] = $path . $filename;
             // }
-    
+
             // Update the category
             $category->update($request->validated());
-    
+
             // Return a success response
             return response()->json([
-                'message' => 'Category updated successfully', 
+                'message' => 'Category updated successfully',
                 'category' => new CategoryResource($category)
             ]);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category)
     {
         $category->delete();
-        
+
         return response()->json(['message' => 'Category deleted successfully'], 204);
     }
+
+
 }
