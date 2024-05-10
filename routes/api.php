@@ -41,7 +41,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
         return $request->user();
     });
     Route::apiResource('profile', UserController::class);
-
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('video', VideoTrendingController::class);
     Route::apiResource('productcomments', ProductCommentsController::class);
