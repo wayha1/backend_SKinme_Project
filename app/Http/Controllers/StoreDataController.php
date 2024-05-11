@@ -17,10 +17,6 @@ class StoreDataController extends Controller
         $data = StoreData::paginate(10);
         return new StoreDataCollection($data);
     }
-    public function show(StoreData $data)
-    {
-        return new StoreDataResource($data);
-    }
     public function store(Store_StoreDataRequest $request)
     {
         $validatedData = $request->validated();
@@ -38,14 +34,13 @@ class StoreDataController extends Controller
 
         $storeData->update($validated);
 
-        return response()->json(['message'=> 'Data Update success', 'data' 
-        => new StoreDataResource($storeData)]);
+        return response()->json([
+        'message' => 'Data Update success', 
+        'data' => new StoreDataResource($storeData)]);
     }
     public function destroy(StoreData $storeData)
     {
-
         $storeData->delete();
-
         return response()->json(['message' => 'Product deleted successfully'], 204);
     }
 

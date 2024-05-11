@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class VideoTrending extends Model
 {
     use HasFactory;
-    protected $fillable = ['video_title1', 'video1', 'category_id'];
+    protected $fillable = [
+        'video_title', 'video_link', 'category_id'
+    ];
 
     public function categories(): BelongsTo
     {

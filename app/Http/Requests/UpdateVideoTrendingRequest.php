@@ -23,16 +23,8 @@ class UpdateVideoTrendingRequest extends FormRequest
     {
         return [
             'category_id' => ['sometimes','required', 'exists:categories,id'],
-            'video_title1' => ['sometimes','required', 'string', 'max:100'],
-            'video1' => ['sometimes','required', 'string', 'max:100'],
-            'video_title2' => ['sometimes','nullable', 'string', 'max:100'],
-            'video2' => ['sometimes','nullable', 'string', 'max:100'],
-            'video_title3' => ['sometimes','nullable', 'string', 'max:100'],
-            'video3' => ['sometimes','nullable', 'string', 'max:100'],
-            'video_title4' => ['sometimes','nullable', 'string', 'max:100'],
-            'video4' => ['sometimes','nullable', 'string', 'max:100'],
-            'video_title5' => ['sometimes','nullable', 'string', 'max:100'],
-            'video5' => ['sometimes','nullable', 'string', 'max:100'],
+            'video_title' => ['sometimes','required', 'max:100'],
+            'video_link' => ['sometimes','required',  'max:100']
         ];
     }
 }

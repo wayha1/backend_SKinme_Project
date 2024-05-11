@@ -26,18 +26,19 @@ class VideoTrendingController extends Controller
         $validatedData['user_id'] = Auth::id();
 
         $videoTrending = VideoTrending::create($validatedData);
-        return response()->json(['message' => 'Video trending created successfully', 'videoTrending'
-         => new VideoTrendingResource($videoTrending)]);
+        return response()->json([
+            'message' => 'Video trending created successfully', 
+            'videoTrending' => new VideoTrendingResource($videoTrending)]);
     }
 
-    public function update(UpdateVideoTrendingRequest $request, VideoTrending $videoTrending, $id)
+    public function update(UpdateVideoTrendingRequest $request, VideoTrending $videoTrending)
     {
-        $videoTrending = VideoTrending::findOrFail($id);
         $validatedData = $request->validated();
 
         $videoTrending->update($validatedData);
 
-        return response()->json(['message' => 'Video trending updated successfully', 
+        return response()->json([
+        'message' => 'Video trending updated successfully', 
         'videoTrending' => new VideoTrendingResource($videoTrending)]);
     }
 

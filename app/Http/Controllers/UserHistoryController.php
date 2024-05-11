@@ -6,5 +6,16 @@ use Illuminate\Http\Request;
 
 class UserHistoryController extends Controller
 {
-    //
+    public function index(){
+
+    }
+    public function store(){
+
+    }
+    public function update(){
+
+    }
+    public function destroy(){
+        
+    }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('comments');
             $table->string('phone_number');
-            $table->boolean('privacy');
+            $table->boolean('privacy')->default(false);
             $table->timestamps();
         });
     }

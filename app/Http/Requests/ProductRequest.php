@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
         return [
             'product_name' => ['required', 'string', 'max:100'],
             'product_brand' => ['required', 'string', 'max:255'],
-            'product_description' => ['nullable', 'string', 'max:500'],
+            'product_description' => ['nullable','max:500'],
             'product_price' => ['required', 'numeric'],
             'product_stock' => ['required', 'integer'],
             'product_rating' => ['required', 'numeric', 'min:0', 'max:5'],

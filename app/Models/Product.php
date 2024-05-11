@@ -23,7 +23,6 @@ class Product extends Model
         "product_banner",
         "is_done",
         "category_id",
-
     ];
 
     protected $casts = [
@@ -34,7 +33,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-    public function products(): HasMany  
+    public function userHistory(): HasMany  
     {
         return $this->hasMany(UserHistory::class);
     }
@@ -42,7 +41,7 @@ class Product extends Model
     {
         return $this->hasMany(Payment::class);
     }
-    public function usercomment(): HasMany
+    public function productComments(): HasMany
     {
         return $this-> hasMany(ProductComment::class);
     }

@@ -18,16 +18,8 @@ return new class extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
             
-            $table->string('video_title1');
-            $table->string('video1');
-            $table->string('video_title2')->nullable();
-            $table->string('video2')->nullable();
-            $table->string('video_title3')->nullable();
-            $table->string('video3')->nullable();
-            $table->string('video_title4')->nullable();
-            $table->string('video4')->nullable();
-            $table->string('video_title5')->nullable();
-            $table->string('video5')->nullable();
+            $table->string('video_title');
+            $table->string('video_link');
             $table->timestamps();
         });
     }

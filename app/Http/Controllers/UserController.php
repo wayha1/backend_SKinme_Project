@@ -11,19 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $profiles = User::where('is_active', true)->paginate(20);
+        $profiles = User::where('is_active', true)->get();
+        return new UserResource($profiles);
     }
+    // public function show(User $profile)
+    // {
+    //     if (!$profile->is_active) {
+    //         return response()->json(['error' => 'User is not active'], 403);
+    //     }
 
-    public function show(User $profile)
-    {
-        if (!$profile->is_active) {
-            return response()->json(['error' => 'User is not active'], 403);
-        }
-
-        return new UserResource($profile);
-    }
+    //     return new UserResource($profile);
+    // }
 
     public function store(StoreUserRequest $request)
     {

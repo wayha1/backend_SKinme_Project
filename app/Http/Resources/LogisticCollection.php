@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class VideoTrendingCollection extends ResourceCollection
+class LogisticCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,8 +14,6 @@ class VideoTrendingCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return [
-            'data' => $this->collection
-        ];
+        return parent::toArray($request);
     }
 }

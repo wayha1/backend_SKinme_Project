@@ -14,6 +14,5 @@ class ContactUs extends Model
         "comments",
         "phone_number",
         "privacy"
-
     ];
 }

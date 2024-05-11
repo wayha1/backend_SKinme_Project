@@ -4,11 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VideoTrendingRequest extends FormRequest
+class UpdateUserCommentsRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -16,12 +19,10 @@ class VideoTrendingRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'category_id' => 'sometimes|required|exists:categories,id',
-            'video_title' => 'sometimes|required|max:100',
-            'video_link' => 'sometimes|required|max:100',
+            //
         ];
     }
 }

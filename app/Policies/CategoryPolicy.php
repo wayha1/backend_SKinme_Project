@@ -11,6 +11,6 @@ class CategoryPolicy
      */
     public function __construct()
     {
-        //
+        
     }
 }
