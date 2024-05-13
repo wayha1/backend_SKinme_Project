@@ -11,7 +11,7 @@ class CartOrderItem extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'action',
-        'action_detail'
+        'quantity',
+        'totale_price'
     ];
 }

@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $profiles = User::where('is_active', true)->get();
-        return new UserResource($profiles);
+        return  UserResource::collection($profiles);
     }
     // public function show(User $profile)
     // {

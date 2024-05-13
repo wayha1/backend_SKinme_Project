@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BestProductController;
 use App\Http\Controllers\CartOrderController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\PaymentController;
@@ -74,4 +75,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::put('productcomments/{productcomments}', [ProductCommentsController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('productcomments/{productcomments}', [ProductCommentsController::class, 'destroy'])->middleware('auth:sanctum');
 
+    Route::get('comments', [CommentsController::class, 'index']);
+    Route::post('comments', [CommentsController::class, 'store'])->middleware('auth:sanctum');
+    Route::put('comments/{comments}', [CommentsController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('comments/{comments}', [CommentsController::class, 'destroy'])->middleware('auth:sanctum');
 

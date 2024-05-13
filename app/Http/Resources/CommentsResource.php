@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VideoTrendingResource extends JsonResource
+class CommentsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,10 @@ class VideoTrendingResource extends JsonResource
     {
         return [
             'id' => $this -> id,
-            'video_title' => $this -> video_title,
-            'video_link' => $this -> video_link,
-            'categories' => new CategoryResource($this->whenLoaded('categories')),
+            'comments' => $this -> comments,
+            'user_id' => new UserResource($this->whenLoaded('users')), 
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

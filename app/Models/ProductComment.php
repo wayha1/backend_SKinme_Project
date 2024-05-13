@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductComment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
+        'comment_id',
         'product_id'
     ];
-
-    public function user()
+    
+    public function comments(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Comment::class);
     }
-    public function products()
+    public function products(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Comment::class);
     }
 }

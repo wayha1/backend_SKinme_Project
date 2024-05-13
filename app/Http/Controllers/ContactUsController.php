@@ -12,7 +12,7 @@ class ContactUsController extends Controller
 {
     public function index(){
         $contact_us = ContactUs::get();
-        return new ContactusResource($contact_us);
+        return ContactusResource::collection($contact_us);
     }
     public function store(ContactUsRequest $request){
         $validated = $request-> validated();

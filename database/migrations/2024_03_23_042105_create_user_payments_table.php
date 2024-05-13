@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_payment', function (Blueprint $table) {
+        Schema::create('user_payments', function (Blueprint $table) {
             $table->id();
+            
             $table->integer('user_id')->constrained()
             ->onDelete('cascade');
             $table->integer('product_id')->constrained()

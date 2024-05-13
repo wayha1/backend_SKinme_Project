@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('product_banner')->nullable();
             $table->boolean('is_done')->default(false);
             
-            // Adding the foreign key column
             $table->foreignId('category_id')->constrained()
             ->cascadeOnDelete()
             ->cascadeOnUpdate();

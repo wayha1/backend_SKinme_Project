@@ -19,8 +19,6 @@ class CategoryController extends Controller
     {
         $categories = Category::with('products')->get();
         return new CategoryCollection($categories);
-        // $categories = Category::all();
-        // return response()->json(['data' => $categories], 200);
     }
     /**
      * Store a newly created resource in storage.

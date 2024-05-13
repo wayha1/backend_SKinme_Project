@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Str; // Add this line to import the Str class
 
 
 class User extends Authenticatable
@@ -68,6 +67,10 @@ class User extends Authenticatable
     public function userPayment(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }
