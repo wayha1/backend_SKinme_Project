@@ -52,8 +52,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('contact-us' , ContactUsController::class)->except('index');
 });
 
-    Route::get('contact-us', [ContactUsController::class, 'index']);
     Route::get('bestproducts', [BestProductController::class, 'index']);
+    Route::get('contact-us', [ContactUsController::class, 'index']);
 
     Route::get('category', [CategoryController::class, 'index']);
     Route::post('category', [CategoryController::class, 'store'])->middleware('auth:sanctum')->middleware(AdminMiddleware::class);;
