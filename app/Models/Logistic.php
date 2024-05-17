@@ -11,6 +11,7 @@ class Logistic extends Model
     protected $fillable = [
         'logistic_name',
         'deliver_name',
-        'date_delivery'
+        'date_delivery',
+        'product_id'
     ];
 }

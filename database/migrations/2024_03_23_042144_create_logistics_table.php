@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('logistic_name');
             $table->string('deliver_name');
             $table->dateTime('date_delivery');
+            
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
