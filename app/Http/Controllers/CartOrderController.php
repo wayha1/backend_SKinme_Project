@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartOrderItemRequest;
 use App\Http\Resources\CartOrderItemResource;
+
+use App\Models\CartOrder;
+
 use App\Models\CartOrderItem;
 use App\Models\Product;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CartOrderController extends Controller
 {
+
+    public function index(){
+        $cart = CartOrder::with('products')->with('users')->get();
+
     public function index()
     {
         $cart = CartOrderItem::with('product')->where('user_id', Auth::id())->get();
+
         return CartOrderItemResource::collection($cart);
     }
 
@@ -42,6 +51,11 @@ class CartOrderController extends Controller
 
     public function store(CartOrderItemRequest $request)
     {
+
+        
+        $cart_items['user_id'] = Auth::id();
+        $cart_items = CartOrder::create($request->validated());
+
         $validated = $request->validated();
         $cartItems = $validated['cart_items'];
         $userId = Auth::id();
@@ -66,6 +80,9 @@ class CartOrderController extends Controller
         ]);
     }
 
+    public function update(CartOrder $cartOrder){
+
+
     public function update(Request $request, CartOrderItem $cartOrderItem)
     {
         $cartOrderItem->update($request->all());
@@ -75,9 +92,14 @@ class CartOrderController extends Controller
         ]);
     }
 
+    public function destroy(CartOrder $cartOrder){
+        $cartOrder->delete();
+
+
     public function destroy(CartOrderItem $cartOrderItem)
     {
         $cartOrderItem->delete();
+
         return response()->json([
             'message' => 'Cart item deleted successfully'
         ], 204);
