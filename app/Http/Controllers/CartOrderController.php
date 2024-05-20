@@ -4,19 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartOrderItemRequest;
 use App\Http\Resources\CartOrderItemResource;
-use App\Models\CartOrderItem;
+use App\Models\CartOrder;
 use Illuminate\Support\Facades\Auth;
 
 class CartOrderController extends Controller
 {
     public function index(){
-        $cart = CartOrderItem::with('products')->with('users')->get();
+        $cart = CartOrder::with('products')->with('users')->get();
         return CartOrderItemResource::collection($cart);
     }
     public function store(CartOrderItemRequest $request)
     {
+        
         $cart_items['user_id'] = Auth::id();
-        $cart_items = CartOrderItem::create($request->validated());
+        $cart_items = CartOrder::create($request->validated());
 
         return response() -> json([
             'message' => 'Product Add To Cart Success',
@@ -24,10 +25,10 @@ class CartOrderController extends Controller
         ]);
         
     }
-    public function update(CartOrderItem $cartOrder){
+    public function update(CartOrder $cartOrder){
 
     }
-    public function destroy(CartOrderItem $cartOrder){
+    public function destroy(CartOrder $cartOrder){
         $cartOrder->delete();
         return response()->json([
             'message' => 'deleted successfully'

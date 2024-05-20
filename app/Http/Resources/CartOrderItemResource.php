@@ -16,8 +16,8 @@ class CartOrderItemResource extends JsonResource
     {
         return [
             'id' => $this -> id,
-            'user_id' => $this -> user_id,
-            'product_id' => $this -> product_id,
+            'user_id' => new UserResource($this->whenLoaded('users')),
+            'product_id' => new ProductResource($this->whenLoaded('products')),
             'quantity' => $this -> quantity,
             'total_price' => $this -> total_price,
             'created_at' => $this->created_at,

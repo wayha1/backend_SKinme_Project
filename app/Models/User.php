@@ -24,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
-        'gender',  
+        'gender',
         'role',
         'is_active',
         'user_image',
@@ -72,5 +72,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-
+    public function cartOrders(): HasMany
+    {
+        return $this->hasMany(CartOrder::class);
+    }
 }
