@@ -13,11 +13,14 @@ class Payment extends Model
     protected $fillable = [
         "user_id",
         "product_id",
-        "card_numner",
-        "card_holder_name",
-        "expiration_date",
-        "cvv",
-        "total_price"
+        "product_name",
+        "qauntity",
+        "amount",
+        "currency",
+        "name",
+        "email",
+        "payment_status",
+        "payment_method"
     ];
     public function products(): BelongsTo
     {

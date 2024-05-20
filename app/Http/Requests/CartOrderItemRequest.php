@@ -22,10 +22,13 @@ class CartOrderItemRequest extends FormRequest
     public function rules(): array
     {
         return [
+
             'user_id' => ['sometimes', 'exists:users,id'],
             'product_id' => ['required', 'exists:products,id'],
             'quantity' => ['required', 'integer'],
             'totale_price' => ['required', 'integer']
+
+
         ];
     }
 }
