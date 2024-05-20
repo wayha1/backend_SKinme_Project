@@ -14,25 +14,25 @@ return new class extends Migration
         Schema::create('user_payments', function (Blueprint $table) {
             $table->id();
             
-            $table->integer('user_id')->constrained()
-            ->onDelete('cascade');
-            $table->integer('product_id')->constrained()
-            ->onDelete('cascade');
-            
-            $table->string('card_number');
-            $table->string('card_holder_name');
-            $table->string('expiration_date');
-            $table->string('cvv');
-            $table->double('total_price');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('product_name');
+            $table->string('qauntity');
+            $table->string('amount'); 
+            $table->string('currency'); 
+            $table->string('name');
+            $table->string('email');
+            $table->string('payment_status');
+            $table->string('payment_method');
+
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_payment');
+        Schema::dropIfExists('user_payments');
     }
 };
