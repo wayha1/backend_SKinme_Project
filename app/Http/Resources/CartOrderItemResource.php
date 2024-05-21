@@ -19,7 +19,7 @@ class CartOrderItemResource extends JsonResource
             'user_id' => new UserResource($this->whenLoaded('users')),
             'product_id' => new ProductResource($this->whenLoaded('products')),
             'quantity' => $this -> quantity,
-            'total_price' => $this -> total_price,
+            'totale_price' => $this -> totale_price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
 
