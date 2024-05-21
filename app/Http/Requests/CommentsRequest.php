@@ -22,10 +22,8 @@ class CommentsRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => ['sometimes', 'exists:users,id'],
             'comments' => ['required', 'max:500'],
-            'user_id' => ['required', 'exists:user,id'],
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
         ];
     }
 }
