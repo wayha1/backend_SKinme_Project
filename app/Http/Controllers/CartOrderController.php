@@ -5,7 +5,6 @@ use App\Http\Requests\CartOrderItemRequest;
 use App\Http\Resources\CartOrderItemResource;
 use App\Models\CartOrder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class CartOrderController extends Controller
 {
