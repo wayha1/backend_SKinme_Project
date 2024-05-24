@@ -6,12 +6,27 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 
 class CategoryController extends Controller
 {
+    public function getProductsByCategoryId($id)
+    {
+        $category = Category::findOrFail($id);
+        $products = $category->products()->get();
+        return response()->json([
+            'category_title' => $category->category_title,
+            'products' => ProductResource::collection($products)
+        ]);
+    }
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        return new CategoryResource($category);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -9,9 +9,28 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
+    public function showByName($name)
+{
+    // Replace %20 with space
+    $productBrand = Str::replaceArray('%20', [' '], $name);
+
+    // Search for the products by brand name
+    $products = Product::where('product_brand', $productBrand)->get();
+
+    // Check if products exist
+    if ($products->isEmpty()) {
+        return response()->json(['message' => 'Products not found'], 404);
+    }
+
+    // Return the product resources
+    return ProductResource::collection($products);
+}
+
     public function index()
     {
         $products = Product::with('categories')->get();
