@@ -38,6 +38,7 @@ Route::get('/categories/search', [CategoryController::class, 'searchByName']);
 Route::get('brand', [BrandController::class, 'index']);
 Route::get('brand/search', [BrandController::class, 'searchByName']);
 Route::get('product', [ProductController::class, 'index']);
+Route::get('product/{name}', [ProductController::class, 'showByName']);
 Route::get('video', [VideoTrendingController::class, 'index']);
 Route::get('productcomments', [ProductCommentsController::class, 'index']);
 Route::get('comments', [CommentsController::class, 'index']);
@@ -78,9 +79,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('product', [ProductController::class, 'store']);
     Route::put('product/{product}', [ProductController::class, 'update']);
     Route::delete('product/{product}', [ProductController::class, 'destroy']);
-    Route::get('product/{name}', [ProductController::class, 'showByName']);
 
-    
     Route::post('video', [VideoTrendingController::class, 'store']);
     Route::put('video/{video}', [VideoTrendingController::class, 'update']);
     Route::delete('video/{video}', [VideoTrendingController::class, 'destroy']);
