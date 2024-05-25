@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,8 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'brand' => ['required', 'max:50'],
-            'brand_icons' => ['nullable', 'max:255'],
-            'products' => BrandRequest::collection($this->whenLoaded('products')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            "brand" => "required|max:50",
+            "brand_icons" => "nullable|max:255", 
         ];
     }
 }

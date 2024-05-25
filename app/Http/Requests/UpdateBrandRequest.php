@@ -23,7 +23,7 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'brand' => ['sometimes','string','max:50'],
-            'brand_icon' => ['sometimes','max:255']
+            'brand_icons' => ['sometimes','max:255']
             
         ];
     }

@@ -71,6 +71,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{category}', [CategoryController::class, 'update']);
     Route::delete('category/{category}', [CategoryController::class, 'destroy']);
+    
     Route::post('brand', [BrandController::class, 'store']);
     Route::put('brand/{brand}', [BrandController::class, 'update']);
     Route::delete('brand/{brand}', [BrandController::class, 'destroy']);
