@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::put('product/{product}', [ProductController::class, 'update']);
     Route::delete('product/{product}', [ProductController::class, 'destroy']);
     Route::get('product/{name}', [ProductController::class, 'showByName']);
+
     
     Route::post('video', [VideoTrendingController::class, 'store']);
     Route::put('video/{video}', [VideoTrendingController::class, 'update']);
