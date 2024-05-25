@@ -33,6 +33,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+    public function brands(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
     public function userHistory(): HasMany  
     {
         return $this->hasMany(UserHistory::class);
