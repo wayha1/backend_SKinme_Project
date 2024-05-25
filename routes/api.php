@@ -70,14 +70,16 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{category}', [CategoryController::class, 'update']);
     Route::delete('category/{category}', [CategoryController::class, 'destroy']);
-
     Route::post('brand', [BrandController::class, 'store']);
     Route::put('brand/{brand}', [BrandController::class, 'update']);
     Route::delete('brand/{brand}', [BrandController::class, 'destroy']);
+
     
     Route::post('product', [ProductController::class, 'store']);
     Route::put('product/{product}', [ProductController::class, 'update']);
     Route::delete('product/{product}', [ProductController::class, 'destroy']);
+    Route::get('product/{name}', [ProductController::class, 'showByName']);
+
     
     Route::post('video', [VideoTrendingController::class, 'store']);
     Route::put('video/{video}', [VideoTrendingController::class, 'update']);
