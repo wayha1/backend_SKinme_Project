@@ -16,6 +16,10 @@ class Comment extends Model
 
     public function users(): BelongsTo
     {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function products(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'product_id');
     }
 }
