@@ -17,9 +17,10 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::with('product')->get();
+        $brands = Brand::with('products')->get();
         return new BrandCollection($brands);
     }
+    
 
     /**
      * Search brands by name.
