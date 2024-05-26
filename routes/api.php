@@ -66,6 +66,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
 });
 
+
 // Routes requiring admin authorization
 Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
