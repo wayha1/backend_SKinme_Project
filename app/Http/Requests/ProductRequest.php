@@ -24,14 +24,14 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name' => ['required', 'string', 'max:100'],
-            'product_brand' => ['required', 'string', 'max:255'],
+            // 'product_brand' => ['required', 'string', 'max:255'],
             'product_description' => ['nullable','max:500'],
             'product_price' => ['required', 'numeric'],
             'product_stock' => ['required', 'integer'],
             'product_rating' => ['required', 'numeric', 'min:0', 'max:5'],
             
             'product_feedback' => ['nullable', 'string'],
-            'product_comment' => UserCommentsRequest::collection($this->whenLoaded('product_comment')),
+            'product_comment' => CommentsRequest::collection($this->whenLoaded('comments')),
             
             'product_image' => ['nullable', 'string', 'max:255'],
             'product_review' => ['nullable', 'string', 'max:255'],
@@ -39,6 +39,7 @@ class ProductRequest extends FormRequest
             
             // Adding validation for the new foreign key column
             'category_id' => ['required', 'exists:categories,id'],
+            'brand_id' => ['required', 'exists:brands,id'],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

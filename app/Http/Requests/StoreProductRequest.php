@@ -23,7 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             "product_name" => "required|max:100",
-            "product_brand"=> "required|max:255",
+            // "product_brand"=> "required|max:255",
             "product_description" => "nullable|string|max:500",
             "product_price" => "required",
             "product_stock" => "required",
@@ -35,6 +35,7 @@ class StoreProductRequest extends FormRequest
 
             // Validation for the category_id field to ensure it exists in the categories table
             "category_id" => "required|exists:categories,id",
+            "brand_id" => "required|exists:brands,id",
         ];
     }
 }
