@@ -23,7 +23,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'product_name' => 'sometimes|required|string|max:100',
-            'product_brand' => 'sometimes|string|max:255',
+            // 'product_brand' => 'sometimes|string|max:255',
             'product_description' => 'sometimes|nullable|max:500',
             'product_price' => 'sometimes|required|numeric',
             'product_stock' => 'sometimes|required|integer',
@@ -33,6 +33,8 @@ class UpdateProductRequest extends FormRequest
             'product_review' => 'sometimes|nullable|string|max:255',
             'product_banner' => 'sometimes|nullable|string|max:255',
             'category_id' => 'sometimes|required|exists:categories,id',
+            'brand_id' => 'sometimes|required|exists:brands,id',
+
         ];
     }
 }

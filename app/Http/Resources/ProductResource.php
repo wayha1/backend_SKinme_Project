@@ -18,7 +18,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'product_name' => $this-> product_name,
-            'product_brand' => $this-> product_brand,
+            
             'product_description' => $this-> product_description,
             'product_price' => $this-> product_price,
             'product_stock' => $this-> product_stock,
@@ -27,8 +27,11 @@ class ProductResource extends JsonResource
             'product_image' => $this-> product_image,
             'product_review' => $this-> product_review,
             'product_banner' => $this-> product_banner,
-            // 'category_id' => $this->category_id,
             'categories' => new CategoryResource($this->whenLoaded('categories')), 
+            'brand_id' => $this->brand_id,
+
+            'brands' => new BrandResource($this->whenLoaded('brands')), 
+
             'status' => $this->is_done ? 'finished' : 'open',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
