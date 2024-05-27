@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+    public function getByName($name)
+{
+    $category = Category::where('category_title', $name)->with('products')->firstOrFail();
+    return new CategoryResource($category);
+}
+
     public function getProductsByCategoryId($id)
     {
         $category = Category::findOrFail($id);

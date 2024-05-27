@@ -74,8 +74,11 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{category}', [CategoryController::class, 'update']);
     Route::delete('category/{category}', [CategoryController::class, 'destroy']);
+    Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
+
     
     Route::post('brand', [BrandController::class, 'store']);
+    Route::get('brand/{name}', [BrandController::class, 'getByName']);
     Route::put('brand/{brand}', [BrandController::class, 'update']);
     Route::delete('brand/{brand}', [BrandController::class, 'destroy']);
 
