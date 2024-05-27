@@ -23,6 +23,7 @@ class CommentsRequest extends FormRequest
     {
         return [
             'user_id' => ['sometimes', 'exists:users,id'],
+            'product_id' => ['sometimes', 'exists:products,id'],
             'comments' => ['required', 'max:500'],
         ];
     }

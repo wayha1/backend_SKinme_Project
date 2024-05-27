@@ -16,6 +16,13 @@ class CartOrderController extends Controller
         return CartOrderItemResource::collection($cartOrders);
     }
 
+    public function showByUserId($user_id)
+    {
+        // Fetch all cart orders for the specified user_id
+        $cartOrders = CartOrder::where('user_id', $user_id)->with(['products', 'user'])->get();
+        return CartOrderItemResource::collection($cartOrders);
+    }
+
     public function store(CartOrderItemRequest $request)
     {
         $validated = $request->validated();
