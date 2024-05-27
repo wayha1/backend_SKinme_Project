@@ -13,6 +13,30 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     /**
+ * Get a brand by name.
+ */
+public function getByName($name)
+{
+    $brand = Brand::where('brand_name', $name)->with('products')->first();
+    if (!$brand) {
+        return response()->json([
+            'message' => 'Brand not found'
+        ], 404);
+    }
+
+    $data = [
+        'id' => $brand->id,
+        'brand' => $brand->brand_name, // Change to the correct column name
+        'brand_icons' => $brand->icons,
+        'products' => $brand->products->toArray(),
+        'created_at' => $brand->created_at,
+        'updated_at' => $brand->updated_at
+    ];
+
+    return response()->json($data);
+}
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
