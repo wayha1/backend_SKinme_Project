@@ -14,6 +14,16 @@ class UserHistoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this -> id,
+            'user_id' => $this-> user_id,
+            'users' => new UserResource($this-> whenLoaded('users')),
+
+            'product_id' => $this-> product_id,
+            'products' => new ProductResource($this-> whenLoaded('products')),
+
+            'quantity' => $this-> quantity,
+            'totale_price' => $this -> totale_price
+        ];
     }
 }

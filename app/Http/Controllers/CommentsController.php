@@ -12,7 +12,7 @@ class CommentsController extends Controller
 {
     public function index()
     {
-        $comments = Comment::with('users')->get();
+        $comments = Comment::with('users')->with('products')->get();
         return CommentsResource::collection($comments);
     }
     public function store(CommentsRequest $request)
