@@ -11,22 +11,44 @@ class CartOrderController extends Controller
 {
     public function index()
     {
-        // Correcting the relationships (assuming CartOrder has 'products' relationship)
-        $cartOrders = CartOrder::with('products')->with('users')->get();
+        // Correcting the relationships (assuming CartOrder has 'products' and 'user' relationships)
+        $cartOrders = CartOrder::with(['products', 'user'])->get();
         return CartOrderItemResource::collection($cartOrders);
     }
 
-    public function showByUserId($user_id)
+    public function show($id)
     {
-        // Fetch all cart orders for the specified user_id
-        $cartOrders = CartOrder::where('user_id', $user_id)->with(['products', 'user'])->get();
-        return CartOrderItemResource::collection($cartOrders);
+        $cartOrder = CartOrder::where('id', $id)->where('user_id', Auth::id())->with(['products', 'user'])->first();
+
+        if (!$cartOrder) {
+            return response()->json([
+                'message' => 'No cart order found for the specified ID and current user.'
+            ], 404);
+        }
+
+        return new CartOrderItemResource($cartOrder);
     }
+
+    // public function showByUserId()
+    // {
+    //     $user_id = Auth::id();  // Get the current authenticated user's ID
+
+    //     // Fetch all cart orders for the current authenticated user
+    //     $cartOrders = CartOrder::where('user_id', $user_id)->with(['products', 'user'])->get();
+
+    //     if ($cartOrders->isEmpty()) {
+    //         return response()->json([
+    //             'message' => 'No cart orders found for the current user.'
+    //         ], 404);
+    //     }
+
+    //     return CartOrderItemResource::collection($cartOrders);
+    // }
 
     public function store(CartOrderItemRequest $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = Auth::id();
+        $validated['user_id'] = Auth::id();  // Set the user_id to the current authenticated user's ID
         $cartOrder = CartOrder::create($validated);
 
         return response()->json([
@@ -37,6 +59,10 @@ class CartOrderController extends Controller
 
     public function update(CartOrderItemRequest $request, CartOrder $cartOrder)
     {
+        if ($cartOrder->user_id != Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         $validated = $request->validated();
         $cartOrder->update($validated);
 
@@ -48,10 +74,28 @@ class CartOrderController extends Controller
 
     public function destroy(CartOrder $cartOrder)
     {
+        if ($cartOrder->user_id != Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         $cartOrder->delete();
 
         return response()->json([
             'message' => 'Cart item deleted successfully'
         ], 204);
     }
+
+    // public function checkUserIdInCartOrders()
+    // {
+    //     $user_id = Auth::id();  // Get the current authenticated user's ID
+    //     $cartOrders = CartOrder::where('user_id', $user_id)->with(['products', 'user'])->get();
+
+    //     if ($cartOrders->isEmpty()) {
+    //         return response()->json([
+    //             'message' => 'No cart orders found for the current user.'
+    //         ], 404);
+    //     }
+
+    //     return CartOrderItemResource::collection($cartOrders);
+    // }
 }
