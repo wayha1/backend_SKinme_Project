@@ -16,9 +16,9 @@ class CartOrderController extends Controller
         return CartOrderItemResource::collection($cartOrders);
     }
 
-    public function show($id)
+    public function show()
     {
-        $cartOrder = CartOrder::where('id', $id)->where('user_id', Auth::id())->with(['products', 'user'])->first();
+        $cartOrder = CartOrder::where('user_id', Auth::id())->with(['products', 'user'])->first();
 
         if (!$cartOrder) {
             return response()->json([

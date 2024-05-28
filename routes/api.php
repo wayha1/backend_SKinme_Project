@@ -62,7 +62,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::apiResource('cart', CartOrderController::class);
     // Route::post('cart/{id}', [CartOrderController::class, 'addtocart']);
     Route::post('stripe', [PaymentController::class, 'stripe']);
-    Route::get('cart/{id}', [CartOrderController::class, 'show']);
+    Route::get('cart/usercart', [CartOrderController::class, 'show']);
 
     // Route::get('payment-stripe', [PaymentController::class, 'stripePost']);
 
