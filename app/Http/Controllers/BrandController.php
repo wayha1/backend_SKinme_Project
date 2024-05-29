@@ -16,12 +16,7 @@ class BrandController extends Controller
  */
 public function getByName($name)
 {
-    $brand = Brand::where('brand', $name)->with('products')->first();
-    if (!$brand) {
-        return response()->json([
-            'message' => 'Brand not found'
-        ], 404);
-    }
+    $brand = Brand::where('brand', $name)->with('products')->firstOrFail();
     return BrandResource::collection($brand);
 }
 
