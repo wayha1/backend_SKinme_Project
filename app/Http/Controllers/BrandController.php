@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BrandRequest;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\BrandCollection;
@@ -32,7 +31,7 @@ public function getByName($name)
     public function index()
     {
         $brands = Brand::with('products')->get();
-        return BrandCollection::collection($brands);
+        return new BrandCollection($brands);
     }
     
 

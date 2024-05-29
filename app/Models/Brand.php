@@ -11,7 +11,8 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = [
-        'brand', 'brand_icons'
+        'brand',
+        'brand_icons'
     ];
 
     public function products(): HasMany
