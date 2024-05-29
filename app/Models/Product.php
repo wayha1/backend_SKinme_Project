@@ -61,4 +61,8 @@ class Product extends Model
     {
         return $this->hasMany(Logistic::class);
     }
+    public function userFavorites(): HasMany
+    {
+        return $this->hasMany(UserFavorite::class);
+    }
 }

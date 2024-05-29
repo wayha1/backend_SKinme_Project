@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logistics', function (Blueprint $table) {
+        Schema::create('user_favorites', function (Blueprint $table) {
             $table->id();
-            $table->string('logistic_name');
-            $table->string('deliver_name');
-            $table->dateTime('date_delivery');
-            
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->integer('user_id')->constrained()
+            ->onDelete('cascade');
+            $table->integer('product_id')->constrained()
+            ->onDelete('cascade');;
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logistic');
+        Schema::dropIfExists('user_favorites');
     }
 };

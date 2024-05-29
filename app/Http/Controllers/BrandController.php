@@ -26,7 +26,7 @@ public function getByName($name)
 
     $data = [
         'id' => $brand->id,
-        'brand' => $brand->brand_name, // Change to the correct column name
+        'brand' => $brand->brand_name,
         'brand_icons' => $brand->icons,
         'products' => $brand->products->toArray(),
         'created_at' => $brand->created_at,

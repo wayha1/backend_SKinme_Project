@@ -77,17 +77,5 @@ class PaymentController extends Controller
     {
         return "Payment is Cancelled. ";
     }
-    public function index(){
-
-    }
-    public function store(){
-
-    }
-    public function update(){
-
-    }
-    public function destroy(){
-
-    }
 }
 

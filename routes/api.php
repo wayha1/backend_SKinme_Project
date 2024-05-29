@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreDataController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserFavoriteController;
 use App\Http\Controllers\UserHistoryController;
 use App\Http\Controllers\VideoTrendingController;
 use App\Http\Middleware\AdminMiddleware;
@@ -61,6 +62,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::apiResource('productcomments', ProductCommentsController::class)->only(['store', 'update', 'destroy']);
     Route::apiResource('comments', CommentsController::class)->only(['store', 'update', 'destroy']);
     Route::apiResource('cart', CartOrderController::class);
+    Route::apiResource('user-favorite', UserFavoriteController::class);
     Route::post('stripe', [PaymentController::class, 'stripe']);
     Route::get('cart/usercart', [CartOrderController::class, 'show']);
 });

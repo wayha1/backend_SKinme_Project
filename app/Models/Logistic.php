@@ -13,11 +13,16 @@ class Logistic extends Model
         'logistic_name',
         'deliver_name',
         'date_delivery',
-        'product_id'
+        'product_id',
+        'user_id'
     ];
     public function products(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

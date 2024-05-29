@@ -6,15 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserHistory extends Model
+class UserFavorite extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'product_id',
-        'quantity',
-        'totale_price'
+        'user_id', 'product_id',
     ];
     public function users(): BelongsTo
     {
