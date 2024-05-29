@@ -42,9 +42,10 @@ Route::get('product/{name}', [ProductController::class, 'showByName']);
 Route::get('video', [VideoTrendingController::class, 'index']);
 Route::get('productcomments', [ProductCommentsController::class, 'index']);
 Route::get('comments', [CommentsController::class, 'index']);
+Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
+Route::get('brand/{name}', [BrandController::class, 'getByName']);
 
-// Authentication routes
-// Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
 
 // Routes requiring user authentication
 Route::middleware(['auth:sanctum'])->group(function() {
@@ -60,25 +61,17 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::apiResource('productcomments', ProductCommentsController::class)->only(['store', 'update', 'destroy']);
     Route::apiResource('comments', CommentsController::class)->only(['store', 'update', 'destroy']);
     Route::apiResource('cart', CartOrderController::class);
-    // Route::post('cart/{id}', [CartOrderController::class, 'addtocart']);
     Route::post('stripe', [PaymentController::class, 'stripe']);
     Route::get('cart/usercart', [CartOrderController::class, 'show']);
-
-    // Route::get('payment-stripe', [PaymentController::class, 'stripePost']);
-
 });
-
 
 // Routes requiring admin authorization
 Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{category}', [CategoryController::class, 'update']);
     Route::delete('category/{category}', [CategoryController::class, 'destroy']);
-    Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
-
     
     Route::post('brand', [BrandController::class, 'store']);
-    Route::get('brand/{name}', [BrandController::class, 'getByName']);
     Route::put('brand/{brand}', [BrandController::class, 'update']);
     Route::delete('brand/{brand}', [BrandController::class, 'destroy']);
 
