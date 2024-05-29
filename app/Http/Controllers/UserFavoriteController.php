@@ -12,12 +12,21 @@ use Illuminate\Http\Request;
 class UserFavoriteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource for the current user.
      */
     public function index()
     {
         $user = Auth::user();
         $favorites = UserFavorite::where('user_id', $user->id)->get();
+        return UserFavoriteResource::collection($favorites);
+    }
+
+    /**
+     * Display a listing of all resources.
+     */
+    public function showAll()
+    {
+        $favorites = UserFavorite::all();
         return UserFavoriteResource::collection($favorites);
     }
 
