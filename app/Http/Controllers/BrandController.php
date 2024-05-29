@@ -40,8 +40,8 @@ public function getByName($name)
      */
     public function searchByName(Request $request)
     {
-        $query = $request->input('name');
-        $brands = Brand::where('name', 'like', '%' . $query . '%')->get();
+        $query = $request->input('brand');
+        $brands = Brand::where('brand', 'like', '%' . $query . '%')->get();
         return new BrandCollection($brands);
     }
 
