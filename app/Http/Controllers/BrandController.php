@@ -17,7 +17,7 @@ class BrandController extends Controller
 public function getByName($name)
 {
     $brand = Brand::where('brand', $name)->with('products')->firstOrFail();
-    return BrandResource::collection($brand);
+    return new BrandResource($brand);
 }
 
     /**
