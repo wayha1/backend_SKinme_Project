@@ -18,11 +18,11 @@ class CommentsController extends Controller
 
         // Fetching comments related to the current product and including user information
         $comments = Comment::where('product_id', $productId)
-                           ->with('user')
-                           ->with('product')
+                           ->with('users')
+                           ->with('products')
                            ->get();
 
-        return CommentsResource::collection($comments);
+        return new CommentsResource($comments);
     }
 
     public function store(CommentsRequest $request)
