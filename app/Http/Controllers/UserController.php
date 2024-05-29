@@ -16,14 +16,14 @@ class UserController extends Controller
         $profiles = User::where('is_active', true)->get();
         return  UserResource::collection($profiles);
     }
-    // public function show(User $profile)
-    // {
-    //     if (!$profile->is_active) {
-    //         return response()->json(['error' => 'User is not active'], 403);
-    //     }
+    public function show(User $profile)
+    {
+        if (!$profile->is_active) {
+            return response()->json(['error' => 'User is not active'], 403);
+        }
 
-    //     return new UserResource($profile);
-    // }
+        return new UserResource($profile);
+    }
 
     public function store(StoreUserRequest $request)
     {
