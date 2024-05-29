@@ -34,6 +34,12 @@ class StripeController extends Controller
                 'cancel_url' => config('app.url') . '/checkout',
             ]);
 
+              // Store payment data into database
+            Payment::create([
+                'product_name' => $productName,
+                'amount' => $total,
+            ]);
+            
             return response()->json(['sessionId' => $session->id]);
         } catch (\Stripe\Exception\ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
