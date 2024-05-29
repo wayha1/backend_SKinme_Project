@@ -17,23 +17,13 @@ class BrandController extends Controller
  */
 public function getByName($name)
 {
-    $brand = Brand::where('brand_name', $name)->with('products')->first();
+    $brand = Brand::where('brand', $name)->with('products')->first();
     if (!$brand) {
         return response()->json([
             'message' => 'Brand not found'
         ], 404);
     }
-
-    $data = [
-        'id' => $brand->id,
-        'brand' => $brand->brand_name,
-        'brand_icons' => $brand->icons,
-        'products' => $brand->products->toArray(),
-        'created_at' => $brand->created_at,
-        'updated_at' => $brand->updated_at
-    ];
-
-    return response()->json($data);
+    return BrandResource::collection($brand);
 }
 
     /**
@@ -42,7 +32,7 @@ public function getByName($name)
     public function index()
     {
         $brands = Brand::with('products')->get();
-        return new BrandCollection($brands);
+        return BrandCollection::collection($brands);
     }
     
 

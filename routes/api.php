@@ -44,7 +44,7 @@ Route::get('video', [VideoTrendingController::class, 'index']);
 Route::get('productcomments', [ProductCommentsController::class, 'index']);
 Route::get('comments', [CommentsController::class, 'index']);
 Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
-Route::get('brand/{name}', [BrandController::class, 'getByName']);
+Route::get('brand/name/{name}', [BrandController::class, 'getByName']);
 
 
 

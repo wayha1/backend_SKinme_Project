@@ -18,16 +18,6 @@ class CategoryController extends Controller
     $category = Category::where('category_title', $name)->with('products')->firstOrFail();
     return new CategoryResource($category);
 }
-
-    public function getProductsByCategoryId($id)
-    {
-        $category = Category::findOrFail($id);
-        $products = $category->products()->get();
-        return response()->json([
-            'category_title' => $category->category_title,
-            'products' => ProductResource::collection($products)
-        ]);
-    }
     public function show($id)
     {
         $category = Category::findOrFail($id);
