@@ -20,6 +20,6 @@ class ProductComment extends Model
     }
     public function products(): BelongsTo
     {
-        return $this->belongsTo(Comment::class);
+        return $this->belongsTo(Product::class);
     }
 }
