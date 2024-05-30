@@ -56,6 +56,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
     Route::apiResource('profile', UserController::class);
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('userhistory', UserHistoryController::class);
@@ -67,7 +68,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::apiResource('user-favorite', UserFavoriteController::class);
     Route::post('stripe', [PaymentController::class, 'stripe']);
     Route::get('cart/usercart', [CartOrderController::class, 'show']);
-    Route::get('product-rating', [ProductRatingController::class)->(['store','update','destroy']);
+    Route::apiResource('product-rating', ProductRatingController::class)->only(['store', 'update', 'destroy']);
 });
 
 // Routes requiring admin authorization
@@ -75,7 +76,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{category}', [CategoryController::class, 'update']);
     Route::delete('category/{category}', [CategoryController::class, 'destroy']);
-    
+
     Route::post('brand', [BrandController::class, 'store']);
     Route::put('brand/{brand}', [BrandController::class, 'update']);
     Route::delete('brand/{brand}', [BrandController::class, 'destroy']);
@@ -87,7 +88,7 @@ Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function() {
     Route::post('video', [VideoTrendingController::class, 'store']);
     Route::put('video/{video}', [VideoTrendingController::class, 'update']);
     Route::delete('video/{video}', [VideoTrendingController::class, 'destroy']);
-    
+
     Route::apiResource('bestproducts', BestProductController::class)->except('index');
     Route::apiResource('contact-us', ContactUsController::class)->except('index');
 });
