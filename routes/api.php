@@ -11,6 +11,7 @@ use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductCommentsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\StoreDataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserFavoriteController;
@@ -45,6 +46,8 @@ Route::get('productcomments', [ProductCommentsController::class, 'index']);
 Route::get('comments', [CommentsController::class, 'index']);
 Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
 Route::get('brand/name/{name}', [BrandController::class, 'getByName']);
+Route::get('product-rating', [ProductRatingController::class, 'index']);
+Route::get('product_rating/{user}', [ProductRatingController::class, 'show']);
 
 
 
@@ -53,7 +56,6 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    
     Route::apiResource('profile', UserController::class);
     Route::apiResource('storedata', StoreDataController::class);
     Route::apiResource('userhistory', UserHistoryController::class);
@@ -65,6 +67,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::apiResource('user-favorite', UserFavoriteController::class);
     Route::post('stripe', [PaymentController::class, 'stripe']);
     Route::get('cart/usercart', [CartOrderController::class, 'show']);
+    Route::get('product-rating', [ProductRatingController::class)->(['store','update','destroy']);
 });
 
 // Routes requiring admin authorization

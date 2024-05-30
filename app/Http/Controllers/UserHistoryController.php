@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserHistoryResource;
+use App\Http\Requests\UserHistoryRequest;
+use App\Http\Requests\UpdateUserHistoryRequest;
 use App\Models\UserHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,14 +27,10 @@ class UserHistoryController extends Controller
     }
 
     // Store a newly created user history record for the current user
-    public function store(Request $request)
+    public function store(UserHistoryRequest $request)
     {
         $user_id = Auth::id();
-        $data = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'details' => 'required|string'
-        ]);
-
+        $data = $request->validate();
         $data['user_id'] = $user_id;
         $user_history = UserHistory::create($data);
 
@@ -40,18 +38,12 @@ class UserHistoryController extends Controller
     }
 
     // Update the specified user history record for the current user
-    public function update(Request $request, $id)
+    public function update(UpdateUserHistoryRequest $request, $id)
     {
         $user_id = Auth::id();
         $user_history = UserHistory::where('user_id', $user_id)->findOrFail($id);
-
-        $data = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'details' => 'required|string'
-        ]);
-
+        $data = $request->validate();
         $user_history->update($data);
-
         return new UserHistoryResource($user_history);
     }
 

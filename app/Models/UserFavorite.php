@@ -19,6 +19,6 @@ class UserFavorite extends Model
     }
     public function products(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }
