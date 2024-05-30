@@ -43,7 +43,7 @@ Route::get('product', [ProductController::class, 'index']);
 Route::get('product/{name}', [ProductController::class, 'showByName']);
 Route::get('video', [VideoTrendingController::class, 'index']);
 Route::get('productcomments', [ProductCommentsController::class, 'index']);
-Route::get('comments', [CommentsController::class, 'index']);
+Route::get('comments', [CommentsController::class, 'show']);
 Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
 Route::get('brand/name/{name}', [BrandController::class, 'getByName']);
 Route::get('product-rating', [ProductRatingController::class, 'index']);

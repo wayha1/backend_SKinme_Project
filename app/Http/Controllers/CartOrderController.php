@@ -18,17 +18,18 @@ class CartOrderController extends Controller
 
     public function show()
     {
-        $cartOrder = CartOrder::where('user_id', Auth::id())->with(['products', 'user'])->first();
+        $cartOrder = CartOrder::where('user_id', Auth::id())
+                              ->with(['products', 'user'])
+                              ->first();
 
         if (!$cartOrder) {
             return response()->json([
-                'message' => 'No cart order found for the specified ID and current user.'
+                'message' => 'No cart order found for the current user.'
             ], 404);
         }
 
-        return CartOrderItemResource::collection($cartOrder);
+        return new CartOrderItemResource($cartOrder);
     }
-
     // public function showByUserId()
     // {
     //     $user_id = Auth::id();  // Get the current authenticated user's ID
