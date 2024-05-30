@@ -16,11 +16,11 @@ class UserHistoryResource extends JsonResource
     {
         return [
             'id' => $this -> id,
-            'user_id' => $this-> user_id,
-            'users' => new UserResource($this-> whenLoaded('users')),
+            // '' => $this-> user_id,
+            'user_id' => new UserResource($this-> whenLoaded('users')),
 
-            'product_id' => $this-> product_id,
-            'products' => new ProductResource($this-> whenLoaded('products')),
+            // '' => $this-> product_id,
+            'product_id' => new ProductResource($this-> whenLoaded('products')),
 
             'quantity' => $this-> quantity,
             'totale_price' => $this -> totale_price

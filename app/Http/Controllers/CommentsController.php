@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentsRequest;
 use App\Http\Requests\UpdateCommentsRequest;
 use App\Http\Resources\CommentsResource;
 use App\Models\Comment;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -13,11 +13,7 @@ class CommentsController extends Controller
 {
     public function index()
     {
-
-        // Fetching comments related to the current product and including user information
-        $comments = Comment::where('product_id')
-        ->with(['products', 'user'])
-                           ->first();
+        $comments = Comment::with(['user', 'products'])->get();
 
         return CommentsResource::collection($comments);
     }
@@ -53,3 +49,4 @@ class CommentsController extends Controller
         ], 204);
     }
 }
+
