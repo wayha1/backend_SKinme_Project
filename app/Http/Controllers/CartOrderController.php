@@ -20,7 +20,7 @@ class CartOrderController extends Controller
     {
         $cartOrder = CartOrder::where('user_id', Auth::id())
                               ->with(['products', 'user'])
-                              ->first();
+                              ->get();
 
         if (!$cartOrder) {
             return response()->json([
