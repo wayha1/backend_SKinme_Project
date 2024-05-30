@@ -18,7 +18,9 @@ class CommentsResource extends JsonResource
             'id' => $this -> id,
             'comments' => $this -> comments,
             'user_id' => new UserResource($this->whenLoaded('users')),
-            'product_id' => new UserResource($this->whenLoaded('products')), 
+
+            'product_id' => new ProductResource($this->whenLoaded('products')), 
+
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

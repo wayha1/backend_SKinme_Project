@@ -22,7 +22,7 @@ class CommentsController extends Controller
                            ->with('products')
                            ->get();
 
-        return new CommentsResource($comments);
+        return CommentsResource::collection($comments);
     }
 
     public function store(CommentsRequest $request)

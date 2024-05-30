@@ -18,7 +18,7 @@ class UserFavoriteController extends Controller
     {
         $user = Auth::user();
         $favorites = UserFavorite::where('user_id', $user->id)->get();
-        return new UserFavoriteResource($favorites);
+        return UserFavoriteResource::collection($favorites);
     }
 
     /**

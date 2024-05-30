@@ -30,7 +30,7 @@ class UserHistoryController extends Controller
     public function store(UserHistoryRequest $request)
     {
         $user_id = Auth::id();
-        $data = $request->validate();
+        $data = $request->validated();
         $data['user_id'] = $user_id;
         $user_history = UserHistory::create($data);
 
