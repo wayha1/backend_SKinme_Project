@@ -26,7 +26,7 @@ class CartOrderController extends Controller
             ], 404);
         }
 
-        return new CartOrderItemResource($cartOrder);
+        return CartOrderItemResource::collection($cartOrder);
     }
 
     // public function showByUserId()

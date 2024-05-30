@@ -11,16 +11,13 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Assuming you are passing the product ID as a query parameter
-        $productId = $request->query('product_id');
 
         // Fetching comments related to the current product and including user information
-        $comments = Comment::where('product_id', $productId)
-                           ->with('users')
-                           ->with('products')
-                           ->get();
+        $comments = Comment::where('product_id')
+        ->with(['products', 'user'])
+                           ->first();
 
         return CommentsResource::collection($comments);
     }
