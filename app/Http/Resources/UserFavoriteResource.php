@@ -17,11 +17,8 @@ class UserFavoriteResource extends JsonResource
         return 
         [
             'id' => $this -> id,
-            'user_id' => $this-> user_id,
-            'users' => new UserResource($this-> whenLoaded('users')),
-
-            'product_id' => $this-> product_id,
-            'products' => new ProductResource($this-> whenLoaded('products')),
+            'user_id' => new UserResource($this-> whenLoaded('users')),
+            'product_id' => new ProductResource($this-> whenLoaded('products')),
         ];
     }
 }
