@@ -28,16 +28,16 @@ class ProductCommentsController extends Controller
         ]);
     }
 
-    public function update(UpdateUserCommentsRequest $request, ProductComment $product_comment)
-    {
-        $validated = $request->validated();
-        $product_comment->update($validated);
+    // public function update(UpdateUserCommentsRequest $request, ProductComment $product_comment)
+    // {
+    //     $validated = $request->validated();
+    //     $product_comment->update($validated);
 
-        return response()->json([
-            'message' => 'Comment updated successfully',
-            'product_comment' => new UserCommentsResource($product_comment)
-        ]);
-    }
+    //     return response()->json([
+    //         'message' => 'Comment updated successfully',
+    //         'product_comment' => new UserCommentsResource($product_comment)
+    //     ]);
+    // }
 
     public function destroy(ProductComment $product_comment)
     {
