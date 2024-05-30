@@ -16,6 +16,7 @@ class CartOrderController extends Controller
         return CartOrderItemResource::collection($cartOrders);
     }
 
+    // for Cart
     public function show()
 {
     $cartOrders = CartOrder::where('user_id', Auth::id())
@@ -30,6 +31,7 @@ class CartOrderController extends Controller
 
     return CartOrderItemResource::collection($cartOrders);
 }
+
 
     // public function showByUserId()
     // {
