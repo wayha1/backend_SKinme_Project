@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BestProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartOrderController;
@@ -48,6 +50,9 @@ Route::get('category/name/{name}', [CategoryController::class, 'getByName']);
 Route::get('brand/name/{name}', [BrandController::class, 'getByName']);
 Route::get('product-rating', [ProductRatingController::class, 'index']);
 Route::get('product_rating/{user}', [ProductRatingController::class, 'show']);
+
+Route::post("/login", [AuthenticatedSessionController::class, "store"]);
+Route::post("/register", [AuthController::class, "store"]);
 
 
 
